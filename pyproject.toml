@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=78", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vocalstream-research"
+version = "0.1.0"
+description = "Reproducible vocal separation quality, compute and streaming scheduling experiments"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy==2.5.3",
+    "soundfile==0.14.0",
+    "scipy==1.18.1",
+    "PyYAML==6.0.3",
+    "torch==2.11.0",
+    "torchaudio==2.11.0",
+    "openunmix==1.3.0",
+    "BS-RoFormer==0.3.9",
+    "librosa==1.0.0",
+    "einops==0.8.2",
+    "beartype==0.14.1",
+    "rotary-embedding-torch==0.3.5",
+    "packaging==26.3",
+]
+
+[project.optional-dependencies]
+metrics = ["musdb==0.4.3", "museval==0.4.1"]
+preview = ["imageio-ffmpeg==0.6.0"]
+reports = ["matplotlib==3.11.2", "pillow==12.3.0", "reportlab==4.4.9"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vocalstream", "vocalstream.*"]
+
+[tool.setuptools.package-data]
+"vocalstream.vendor.zfturbo_bsroformer" = ["LICENSE"]

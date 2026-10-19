@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+# Pinned upstream bytes are verified at model load. Preserve them on Windows.
+/vocalstream/vendor/zfturbo_bsroformer/** -text -eol
+
+# Published evidence/figure hashes refer to exact exported bytes.
+/reports/** -text -eol
+/assets/** -text -eol
+*.png binary
+*.zip binary

@@ -1,0 +1,8 @@
+name: vocalstream
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+# Activate this environment, install the CPU/CUDA PyTorch build you need,
+# then run: python -m pip install -e .

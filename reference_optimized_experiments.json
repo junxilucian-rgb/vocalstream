@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "root": "data/musdb18-hq",
+  "seed": 2026,
+  "threads": 1,
+  "device": "cuda",
+  "pilot_tracks": ["ANiMAL - Rockshow", "Actions - One Minute Smile", "Alexander Ross - Goodbye Bolero"],
+  "pilot_start": 60,
+  "pilot_duration": 30,
+  "purpose": "Pretrained comparison extended with inference-only vocal-head selection; full validation and frozen test remain separate stages",
+  "experiments": [
+    {"name": "openunmix_hq", "system": "openunmix", "model": "umxhq", "niter": 1},
+    {"name": "bs_hq_fp32_o2", "system": "bsroformer", "overlap": 2, "precision": "fp32", "bs_heads": "all"},
+    {"name": "bs_hq_amp_o2", "system": "bsroformer", "overlap": 2, "precision": "amp", "bs_heads": "all"},
+    {"name": "bs_hq_vocal_amp_o2", "system": "bsroformer", "overlap": 2, "precision": "amp", "bs_heads": "vocals"}
+  ],
+  "stages": {
+    "pilot": ["openunmix_hq", "bs_hq_vocal_amp_o2"],
+    "ablation": ["bs_hq_fp32_o2", "bs_hq_amp_o2", "bs_hq_vocal_amp_o2"],
+    "validation": ["openunmix_hq", "bs_hq_fp32_o2", "bs_hq_amp_o2", "bs_hq_vocal_amp_o2"]
+  },
+  "interpretation": "This configuration is not a frozen selection. Validate whole songs before freeze and final test. Head selection retains bidirectional attention; public checkpoint training list is unknown. Test must not guide parameter changes."
+}

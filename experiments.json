@@ -1,0 +1,10 @@
+{
+  "purpose": "validation-only quality/compute/latency ablation; educational baseline",
+  "seed": 2026,
+  "experiments": [
+    {"name": "fft512_h32", "n_fft": 512, "hop_length": 128, "hidden_size": 32},
+    {"name": "fft1024_h32", "n_fft": 1024, "hop_length": 256, "hidden_size": 32},
+    {"name": "fft2048_h32", "n_fft": 2048, "hop_length": 512, "hidden_size": 32},
+    {"name": "fft1024_h64", "n_fft": 1024, "hop_length": 256, "hidden_size": 64}
+  ]
+}

@@ -1,0 +1,2548 @@
+{
+  "publication_schema_version": 1,
+  "study_id": "streaming_study_20261019",
+  "data_minimization": {
+    "absolute_paths": "Replaced by logical project-relative or MUSDB18-HQ/ references; unknown runtime/cache paths omitted.",
+    "logical_artifact_paths": "Identify historical artifacts; audio and console logs are not included or downloadable from those paths.",
+    "included": "Numeric measurements, per-track errors, block timings, experiment configuration, software/hardware metadata, source/input/output/checkpoint SHA-256 hashes.",
+    "excluded": [
+      "audio",
+      "model weights",
+      "console logs",
+      "private correspondence",
+      "absolute local paths"
+    ],
+    "numeric_measurements_modified": false,
+    "formal_test_evaluation": false
+  },
+  "original_evidence_sha256": {
+    "analysis": "39b150629e11d3256f23cb03e829086f628652c6f7efce4f5d6462fcb95f6033",
+    "protocol": "e04df2b5d8a0b566847f112bc5e6ba564a3c4db448f3f306766a0fd8090f8161",
+    "run": "e31a0448e9fb39c2bca5f700f372928b4c0060c2944fb1e416dd75c0e9bc6212"
+  },
+  "analysis": {
+    "schema_version": 1,
+    "status": "complete",
+    "configuration": {
+      "schema_version": 1,
+      "root": "MUSDB18-HQ",
+      "tracks": [
+        "Actions - One Minute Smile",
+        "Alexander Ross - Goodbye Bolero",
+        "ANiMAL - Rockshow"
+      ],
+      "start_seconds": 60.0,
+      "duration_seconds": 4.0,
+      "sample_rate": 44100,
+      "requested_samples": 176400,
+      "device": "cuda",
+      "precision": "amp",
+      "heads": "vocals",
+      "context_seconds": 2.0,
+      "overlap": 2,
+      "threads": 1,
+      "seed": 2026,
+      "settings": [
+        {
+          "name": "emit20_look0",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.0
+        },
+        {
+          "name": "emit20_look40",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.04
+        },
+        {
+          "name": "emit20_look160",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.16
+        },
+        {
+          "name": "emit80_look40",
+          "emit_seconds": 0.08,
+          "lookahead_seconds": 0.04
+        }
+      ],
+      "timing_trials_per_track_setting": 1,
+      "expected_jobs": 13,
+      "scope": "three short official development clips; simulated file streaming, no training/test/device I/O",
+      "quality_protocol": "whole clip plus one identical contiguous real-context interval shared by all streaming settings and the offline reference; undefined if empty"
+    },
+    "common_quality_interval_clip_relative_samples": [
+      87318,
+      169344
+    ],
+    "common_interval_convention": "start inclusive, end exclusive; one identical contiguous target interval across all tracks/settings and offline output",
+    "quality_summary": {
+      "offline_amp2s": {
+        "track_count": 3,
+        "valid_whole_clip_si_sdr_tracks": 3,
+        "valid_common_interval_si_sdr_tracks": 3,
+        "whole_clip_si_sdr_median_db": 10.990056002271057,
+        "common_interval_si_sdr_median_db": 10.708958813240832,
+        "common_interval_paired_delta_vs_offline_median_db": 0.0
+      },
+      "emit20_look0": {
+        "track_count": 3,
+        "valid_whole_clip_si_sdr_tracks": 3,
+        "valid_common_interval_si_sdr_tracks": 3,
+        "whole_clip_si_sdr_median_db": -2.478487309177501,
+        "common_interval_si_sdr_median_db": 0.47388236806229217,
+        "common_interval_paired_delta_vs_offline_median_db": -9.01557739196362
+      },
+      "emit20_look40": {
+        "track_count": 3,
+        "valid_whole_clip_si_sdr_tracks": 3,
+        "valid_common_interval_si_sdr_tracks": 3,
+        "whole_clip_si_sdr_median_db": 2.3434497981409748,
+        "common_interval_si_sdr_median_db": 6.5653960203013355,
+        "common_interval_paired_delta_vs_offline_median_db": -4.1435627929394965
+      },
+      "emit20_look160": {
+        "track_count": 3,
+        "valid_whole_clip_si_sdr_tracks": 3,
+        "valid_common_interval_si_sdr_tracks": 3,
+        "whole_clip_si_sdr_median_db": 7.774077213677085,
+        "common_interval_si_sdr_median_db": 9.717496572259043,
+        "common_interval_paired_delta_vs_offline_median_db": -0.44185530221714053
+      },
+      "emit80_look40": {
+        "track_count": 3,
+        "valid_whole_clip_si_sdr_tracks": 3,
+        "valid_common_interval_si_sdr_tracks": 3,
+        "whole_clip_si_sdr_median_db": 4.091521113436925,
+        "common_interval_si_sdr_median_db": 7.7811433820213995,
+        "common_interval_paired_delta_vs_offline_median_db": -1.8889075690615489
+      }
+    },
+    "tracks": [
+      {
+        "track": "Actions - One Minute Smile",
+        "clip_start_sample_in_song": 2646000,
+        "clip_samples": 176400,
+        "common_interval_clip_relative_samples": [
+          87318,
+          169344
+        ],
+        "settings": {
+          "offline_amp2s": {
+            "quality_whole_clip": {
+              "si_sdr_db": 10.838876298557752,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.104635201120189,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 15.94351149967794,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 11.180769926310985,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.2760333166566705,
+              "reference_projection_gain": 0.9281050504769112,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 11.460714748706733,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.297635575581404,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 16.758350324288138,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 11.758334785138585,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.25827552959651845,
+              "reference_projection_gain": 0.9284000121053622,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": 0.0
+          },
+          "emit20_look0": {
+            "quality_whole_clip": {
+              "si_sdr_db": 0.7281528216051547,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.104635201120189,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 5.832788022725344,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.3480003987282925,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.6801426043817116,
+              "reference_projection_gain": 0.49296086631813096,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 2.4451373567431136,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.297635575581404,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 7.7427729323245185,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 4.343748750711822,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.6064745242253969,
+              "reference_projection_gain": 0.5809265655330497,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -9.01557739196362
+          },
+          "emit20_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 5.6415040153281035,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.104635201120189,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 10.746139216448292,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 6.646689188203067,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.46522767380872126,
+              "reference_projection_gain": 0.7452069126292502,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 7.502836619478196,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.297635575581404,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 12.800472195059601,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 8.145526960880131,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.3914926852103371,
+              "reference_projection_gain": 0.8042724933092998,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -3.957878129228537
+          },
+          "emit20_look160": {
+            "quality_whole_clip": {
+              "si_sdr_db": 8.60876001675014,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.104635201120189,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 13.713395217870328,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 9.167112977343473,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.3480521742738518,
+              "reference_projection_gain": 0.8736320055449902,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 11.018859446489593,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.297635575581404,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 16.316495022070995,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 11.345353349182561,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.2708521781978218,
+              "reference_projection_gain": 0.9188426607135356,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -0.44185530221714053
+          },
+          "emit80_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 6.976827572700236,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.104635201120189,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 12.081462773820425,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 7.744890706609614,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.409973197080381,
+              "reference_projection_gain": 0.8043722869633169,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 9.712064541940755,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -5.297635575581404,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 15.00970011752216,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 10.11484096762654,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.31207426161329394,
+              "reference_projection_gain": 0.8757791626519891,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -1.7486502067659782
+          }
+        }
+      },
+      {
+        "track": "Alexander Ross - Goodbye Bolero",
+        "clip_start_sample_in_song": 2646000,
+        "clip_samples": 176400,
+        "common_interval_clip_relative_samples": [
+          87318,
+          169344
+        ],
+        "settings": {
+          "offline_amp2s": {
+            "quality_whole_clip": {
+              "si_sdr_db": 11.738096187026468,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -7.69694957552904,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 19.435045762555507,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 12.0148604125162,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.2507592598987918,
+              "reference_projection_gain": 0.9453586779899251,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 1.9567223298049132,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -17.88692005535834,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 19.84364238516325,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.855122926447244,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.641569712912191,
+              "reference_projection_gain": 0.7276878374664506,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": 0.0
+          },
+          "emit20_look0": {
+            "quality_whole_clip": {
+              "si_sdr_db": -4.323957293163084,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -7.69694957552904,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 3.3729922823659555,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 1.2375710562426718,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.8672043490323397,
+              "reference_projection_gain": 0.19303013283282222,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": -5.312906316801711,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -17.88692005535834,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 12.574013738556626,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 1.0975164372202266,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.8813008279760639,
+              "reference_projection_gain": 0.19704239462188797,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -7.269628646606624
+          },
+          "emit20_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 0.4780142236990518,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -7.69694957552904,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 8.174963799228092,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.0376005901894954,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.7048877618652621,
+              "reference_projection_gain": 0.414142660804355,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": -3.2354820444253622,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -17.88692005535834,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 14.651438010932976,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 1.6694201226317014,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.8251425708587558,
+              "reference_projection_gain": 0.3517924364415843,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -5.1922043742302755
+          },
+          "emit20_look160": {
+            "quality_whole_clip": {
+              "si_sdr_db": 7.774077213677085,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -7.69694957552904,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 15.471026789206125,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 8.309888805831296,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.3841541769744863,
+              "reference_projection_gain": 0.7947831447953786,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 3.2865740325793973,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -17.88692005535834,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 21.173494087937737,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 4.935035805188961,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.5665630009049085,
+              "reference_projection_gain": 0.6472079527363614,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": 1.329851702774484
+          },
+          "emit80_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 1.6392462396398382,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -7.69694957552904,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 9.336195815168878,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.6866768668871392,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.6541331468314109,
+              "reference_projection_gain": 0.48124755799847063,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 0.06781476074336436,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -17.88692005535834,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 17.954734816101702,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.033121932709049,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.7052513129831833,
+              "reference_projection_gain": 0.47847442627552106,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -1.8889075690615489
+          }
+        }
+      },
+      {
+        "track": "ANiMAL - Rockshow",
+        "clip_start_sample_in_song": 2646000,
+        "clip_samples": 176400,
+        "common_interval_clip_relative_samples": [
+          87318,
+          169344
+        ],
+        "settings": {
+          "offline_amp2s": {
+            "quality_whole_clip": {
+              "si_sdr_db": 10.990056002271057,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.6366771255889105,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 14.626733127859968,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 11.322363222961688,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.2715700291175597,
+              "reference_projection_gain": 0.9286246118781966,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 10.708958813240832,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.0492508793929667,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 13.758209692633798,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 11.062681071704208,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.2798117491992312,
+              "reference_projection_gain": 0.9232302920221156,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": 0.0
+          },
+          "emit20_look0": {
+            "quality_whole_clip": {
+              "si_sdr_db": -2.478487309177501,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.6366771255889105,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 1.1581898164114097,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 1.8668025316170735,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.8066030751680541,
+              "reference_projection_gain": 0.29612086589258046,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 0.47388236806229217,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.0492508793929667,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 3.523133247455259,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 3.1179432589261675,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.6983977588495274,
+              "reference_projection_gain": 0.4382928113516317,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -10.23507644517854
+          },
+          "emit20_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 2.3434497981409748,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.6366771255889105,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 5.980126923729886,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 4.239508909071294,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.6137967075944389,
+              "reference_projection_gain": 0.5585901733686897,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 6.5653960203013355,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.0492508793929667,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 9.614646899694302,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 7.306463994484949,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.4311980620093348,
+              "reference_projection_gain": 0.7537336156239746,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -4.1435627929394965
+          },
+          "emit20_look160": {
+            "quality_whole_clip": {
+              "si_sdr_db": 6.934623413522515,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.6366771255889105,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 10.571300539111427,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 7.712457686988609,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.4115068942648252,
+              "reference_projection_gain": 0.8041755524090879,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 9.717496572259043,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.0492508793929667,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 12.766747451652009,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 10.136922465253589,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.3112819057987616,
+              "reference_projection_gain": 0.8831050656792674,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -0.9914622409817895
+          },
+          "emit80_look40": {
+            "quality_whole_clip": {
+              "si_sdr_db": 4.091521113436925,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.6366771255889105,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 7.7281982390258355,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 5.464519675349121,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.5330574485430999,
+              "reference_projection_gain": 0.668099912510903,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 176400,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "quality_common_real_context_interval": {
+              "si_sdr_db": 7.7811433820213995,
+              "si_sdr_undefined_reason": null,
+              "mixture_si_sdr_db": -3.0492508793929667,
+              "mixture_si_sdr_undefined_reason": null,
+              "si_sdri_db": 10.830394261414366,
+              "si_sdri_undefined_reason": null,
+              "global_residual_sdr_db": 8.363824765519958,
+              "global_residual_sdr_undefined_reason": null,
+              "normalized_waveform_rmse": 0.3817761216061493,
+              "reference_projection_gain": 0.8074055851313567,
+              "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+              "frames": 82026,
+              "channels": 2,
+              "protocol": {
+                "segment": "entire_supplied_segment",
+                "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+                "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+                "alignment": "none; caller must preserve time alignment",
+                "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+                "silence_rms_threshold": 1e-08,
+                "numerical_energy_floor_ratio": 1e-12,
+                "score_cap_db": 120.0,
+                "museval_bsseval_sdr": false
+              }
+            },
+            "common_interval_si_sdr_delta_vs_offline_db": -2.9278154312194324
+          }
+        }
+      }
+    ],
+    "steady_emission_timing": {
+      "emit20_look0": {
+        "emission_count": 303,
+        "processing_seconds_p50": 0.20825339999282733,
+        "processing_seconds_p95": 0.2120524499914609,
+        "processing_seconds_max": 0.21652570000151172,
+        "total_processing_seconds": 63.198745200410485,
+        "total_output_audio_seconds": 6.0600000000000005,
+        "processing_rtf_vs_emitted_audio": 10.428835841651894,
+        "compute_over_nominal_period_fraction": 1.0,
+        "virtual_deadline_miss_fraction": 1.0,
+        "virtual_queue_wait_seconds_p50": 28.147313900389708,
+        "virtual_queue_wait_seconds_p95": 36.68425553009356,
+        "virtual_queue_wait_seconds_max": 37.77409960001707,
+        "virtual_first_boundary_ready_delay_seconds_p95": 36.912676130078964
+      },
+      "emit20_look40": {
+        "emission_count": 303,
+        "processing_seconds_p50": 0.20798979996470734,
+        "processing_seconds_p95": 0.21083312999107875,
+        "processing_seconds_max": 0.21877149998908862,
+        "total_processing_seconds": 63.04394580016378,
+        "total_output_audio_seconds": 6.0600000000000005,
+        "processing_rtf_vs_emitted_audio": 10.40329138616564,
+        "compute_over_nominal_period_fraction": 1.0,
+        "virtual_deadline_miss_fraction": 1.0,
+        "virtual_queue_wait_seconds_p50": 27.718366499934348,
+        "virtual_queue_wait_seconds_p95": 36.21817100014538,
+        "virtual_queue_wait_seconds_max": 37.158579700104895,
+        "virtual_first_boundary_ready_delay_seconds_p95": 36.48597445017542
+      },
+      "emit20_look160": {
+        "emission_count": 303,
+        "processing_seconds_p50": 0.20804890000727028,
+        "processing_seconds_p95": 0.21179597001173533,
+        "processing_seconds_max": 0.22488110000267625,
+        "total_processing_seconds": 63.180615700548515,
+        "total_output_audio_seconds": 6.0600000000000005,
+        "processing_rtf_vs_emitted_audio": 10.425844175008004,
+        "compute_over_nominal_period_fraction": 1.0,
+        "virtual_deadline_miss_fraction": 1.0,
+        "virtual_queue_wait_seconds_p50": 26.5382398002618,
+        "virtual_queue_wait_seconds_p95": 35.13180368038127,
+        "virtual_queue_wait_seconds_max": 36.09381230042316,
+        "virtual_first_boundary_ready_delay_seconds_p95": 35.52299474039115
+      },
+      "emit80_look40": {
+        "emission_count": 75,
+        "processing_seconds_p50": 0.20789939997484908,
+        "processing_seconds_p95": 0.2121305000036955,
+        "processing_seconds_max": 0.2155050999717787,
+        "total_processing_seconds": 15.616177100047935,
+        "total_output_audio_seconds": 6.0,
+        "processing_rtf_vs_emitted_audio": 2.6026961833413225,
+        "compute_over_nominal_period_fraction": 1.0,
+        "virtual_deadline_miss_fraction": 1.0,
+        "virtual_queue_wait_seconds_p50": 4.649110800242052,
+        "virtual_queue_wait_seconds_p95": 6.0562445001595195,
+        "virtual_queue_wait_seconds_max": 6.190603000253906,
+        "virtual_first_boundary_ready_delay_seconds_p95": 6.388778309968767
+      }
+    },
+    "nominal_availability_seconds": {
+      "emit20_look0": 0.02,
+      "emit20_look40": 0.06,
+      "emit20_look160": 0.18,
+      "emit80_look40": 0.12
+    },
+    "waveform_manifest": {
+      "Actions - One Minute Smile": {
+        "offline_amp2s": {
+          "path": "results/streaming_study_20261019/offline_amp2s/attempt_01/output/track_001/vocals_estimate.wav",
+          "file_sha256": "d4de1e33ecfc9acf73020a2813dc7dfdb3e9a5a1f94d993c56beab81c2e3c14a",
+          "float32_samples_sha256": "b6875a401e370e2625d1a3bbb61fb44d632416c53b05f432220e6315a885abbc",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look0": {
+          "path": "results/streaming_study_20261019/stream_track01_emit20_look0/attempt_01/output/vocals.wav",
+          "file_sha256": "30b3e1043e7cb6e436c321c6aabadd72aadd8d553b49f7367010187df49d06f1",
+          "float32_samples_sha256": "6a38722021fe176442c40aa95dba5f1e09d3107a7236a19f3bb07fbe45b21b26",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look40": {
+          "path": "results/streaming_study_20261019/stream_track01_emit20_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "92cbe426ec53196a6e0de6f88f435825fd8e349e1354853951c6ac4f07c7890b",
+          "float32_samples_sha256": "0bbda641353d817e19ca09a6031c52c7e7400bbd1d37419b7c48a621e9a3f8fe",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look160": {
+          "path": "results/streaming_study_20261019/stream_track01_emit20_look160/attempt_01/output/vocals.wav",
+          "file_sha256": "76877072d46d887f684562bf1218a94b5053dcfe75d17ca059adf2e6dd1afe46",
+          "float32_samples_sha256": "439a72a7d93c720a1489b0ed6942d287879641c1990abb14728d4b2f1571394f",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit80_look40": {
+          "path": "results/streaming_study_20261019/stream_track01_emit80_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "791c8040cdea163f9e743bde33f7aad2537b8039369369ae2ebbd5ad293b1725",
+          "float32_samples_sha256": "9a56c30ce1f1ee512d9d664058b4d971cb3ede45e440a66fe3187c582f5ecfed",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        }
+      },
+      "Alexander Ross - Goodbye Bolero": {
+        "offline_amp2s": {
+          "path": "results/streaming_study_20261019/offline_amp2s/attempt_01/output/track_002/vocals_estimate.wav",
+          "file_sha256": "687ff43e196c237024910a8530b3e2320122b99e3bf7c24fdcf44e162112d4cb",
+          "float32_samples_sha256": "feca3ac318d41b4541c3880027cdc9141e628095115855c724601d43179d4605",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look0": {
+          "path": "results/streaming_study_20261019/stream_track02_emit20_look0/attempt_01/output/vocals.wav",
+          "file_sha256": "5daeae77ad9e9c85b7ddd9c73e3163fae18d14c07a397e9542ab8115de1db34e",
+          "float32_samples_sha256": "830f118ad900df31002072631e30e38d6ea2eeb57ede01ec601e1b81115acbb1",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look40": {
+          "path": "results/streaming_study_20261019/stream_track02_emit20_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "d9866f7b2feae3bb2ba44643376e74c97a50a767d460ff7404c47e965b5a812a",
+          "float32_samples_sha256": "fd8966bb5ae4d5dc218590c01f077cb8df72cae7da6e675b6a76cb642e05d35f",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look160": {
+          "path": "results/streaming_study_20261019/stream_track02_emit20_look160/attempt_01/output/vocals.wav",
+          "file_sha256": "baefcc75d9fb7104b1ba9b2b3f77e787cb6c6c02d413cb510bb301de536e0ba5",
+          "float32_samples_sha256": "3bf9ac625499f6685565f197759dc92487e22ddbe286aa62d8d1b1e7a6ce1355",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit80_look40": {
+          "path": "results/streaming_study_20261019/stream_track02_emit80_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "2b98d523060947d944b463a4cdc227c67246ca939661c44c385ecd4f5aafa520",
+          "float32_samples_sha256": "2d9fd24292e0acec04bff402b0434bac9fad1188b9d156879ebbca6abab0eff9",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        }
+      },
+      "ANiMAL - Rockshow": {
+        "offline_amp2s": {
+          "path": "results/streaming_study_20261019/offline_amp2s/attempt_01/output/track_003/vocals_estimate.wav",
+          "file_sha256": "a85fd94208d9dc61ec5e0681f1d0e2000dd5b87b80c5ff0612bfc2192c774e80",
+          "float32_samples_sha256": "076f677548c749852edb03581677fa88dbe9bf083235d128d1914b59e96bb08c",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look0": {
+          "path": "results/streaming_study_20261019/stream_track03_emit20_look0/attempt_01/output/vocals.wav",
+          "file_sha256": "ce3dd68404dc5066c699898a98b463980c4525c1ff45e13dc2b2ee104be3afc6",
+          "float32_samples_sha256": "28b49c53f6d7bfc73b39d7d68809840c2a4eebb03c556bdea0ff4a1b9f3b49a5",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look40": {
+          "path": "results/streaming_study_20261019/stream_track03_emit20_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "62907512e17cfc16bd40b6db92dbf380db26cb56c514f03ecce4df92da3fdef4",
+          "float32_samples_sha256": "4a19d42ae49ab085459ac67943a2cd5186c8a7451f2878057535fdb4da08c670",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit20_look160": {
+          "path": "results/streaming_study_20261019/stream_track03_emit20_look160/attempt_01/output/vocals.wav",
+          "file_sha256": "2cb927bdebaf8f078dcd465a61d96cf88f710ca92527f80f674378cecc282bc2",
+          "float32_samples_sha256": "4b237a87f1873c0dd92c34d16f46f1766b5d782d262198adf77f17ded2ef6948",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        },
+        "emit80_look40": {
+          "path": "results/streaming_study_20261019/stream_track03_emit80_look40/attempt_01/output/vocals.wav",
+          "file_sha256": "d60047feafa0c50a6e4c614f7d2d3fd94000ae0cb47bd45534b22228e28a337d",
+          "float32_samples_sha256": "bc46aa6bad4764716d412f10023080ce666033e060a585548852d2b802471a75",
+          "frames": 176400,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "FLOAT"
+        }
+      }
+    },
+    "source_audio_manifest": [
+      {
+        "track": "Actions - One Minute Smile",
+        "mixture_file_sha256": "0a12fe67897976b2e2457e39102bc5e3394e4344e69e6eeb9c88e8ebeaf4b9d8",
+        "reference_file_sha256": "53e34e30474a54761f0d2b38740125403a0aebeb6bd2d1137bf0697706cd8552",
+        "mixture_clip_float32_sha256": "ef4110b1f8a34a7199180131a54971a149cf4b0fac7a30b0f2d8ec0a0fa59ff5",
+        "reference_clip_float32_sha256": "d51a337e0d415a06a55edacc225440abd59ad0636fcd93343a30d31096d4fd17"
+      },
+      {
+        "track": "Alexander Ross - Goodbye Bolero",
+        "mixture_file_sha256": "012db8fa35600f1b9628ead6ea93bea8ab01b814b07a2eee32752ceb0d3e2197",
+        "reference_file_sha256": "c966719457da8c49621c1ac007ffe29af44eda5d0e6ef560dff34440a0cb50cf",
+        "mixture_clip_float32_sha256": "d6a6c5904eb2037aa982d6da3c3226b2dac2453631bc05314dd7941fe460a514",
+        "reference_clip_float32_sha256": "75c20a33f4fd7647634c758d0d9142b9a530bbb8d30e3509b8a7cc3bd2ea403a"
+      },
+      {
+        "track": "ANiMAL - Rockshow",
+        "mixture_file_sha256": "7b19ec8253b44596dadb5e9cc90d0b0652cd421e46f85ac521b27bcb37b533b0",
+        "reference_file_sha256": "b304f177e8d6ad8e8919ab4ef82d43783de13d5b7a637b9e540c73826a48c62e",
+        "mixture_clip_float32_sha256": "6ab7e541365dd0ca66257766903b777ba3ae477bc5024d62280089d43ee3199a",
+        "reference_clip_float32_sha256": "a8afd588f04dc858ebf829b065de606d26fba96e5fe39c9c960781b1ea341a56"
+      }
+    ],
+    "report_index": {
+      "offline_amp2s": {
+        "path": "results/streaming_study_20261019/offline_amp2s/attempt_01/output/report.json",
+        "report_sha256": "65dd64a0c02ab3a1ffe592233227b0b54e276eaf8881940619b430ea11fc8cd6"
+      },
+      "stream_track01_emit20_look0": {
+        "path": "results/streaming_study_20261019/stream_track01_emit20_look0/attempt_01/output/report.json",
+        "report_sha256": "ee36ad9d38886e135f09eec64d141d082c7c9e240448af92ec23ee9e417aaa77"
+      },
+      "stream_track01_emit20_look40": {
+        "path": "results/streaming_study_20261019/stream_track01_emit20_look40/attempt_01/output/report.json",
+        "report_sha256": "440fb9f5a66250ac137fd0e00df94f4a7f02e3e53ba1ae191b3c4e1ded5a808b"
+      },
+      "stream_track01_emit20_look160": {
+        "path": "results/streaming_study_20261019/stream_track01_emit20_look160/attempt_01/output/report.json",
+        "report_sha256": "3dd53ae81f23571ef79b8c49755fed67814ee8c404b89b12db990149c575651c"
+      },
+      "stream_track01_emit80_look40": {
+        "path": "results/streaming_study_20261019/stream_track01_emit80_look40/attempt_01/output/report.json",
+        "report_sha256": "cf13352dfc81bfed17f44664543659e2e7ce0402275c562f5d6a7db7d48edd80"
+      },
+      "stream_track02_emit20_look40": {
+        "path": "results/streaming_study_20261019/stream_track02_emit20_look40/attempt_01/output/report.json",
+        "report_sha256": "9e9c7c9f525a34bf9e424561c940cdd5171de30252f624320807f8f53aa163cc"
+      },
+      "stream_track02_emit20_look160": {
+        "path": "results/streaming_study_20261019/stream_track02_emit20_look160/attempt_01/output/report.json",
+        "report_sha256": "7c92176cbda1165d6550fb715b5f84464dffaa0ddc86335137f1100562380141"
+      },
+      "stream_track02_emit80_look40": {
+        "path": "results/streaming_study_20261019/stream_track02_emit80_look40/attempt_01/output/report.json",
+        "report_sha256": "1cc17d0edb94e8a794b76fd5ca01fb75f2d58c1a0de0366eb5640f02ff31c9df"
+      },
+      "stream_track02_emit20_look0": {
+        "path": "results/streaming_study_20261019/stream_track02_emit20_look0/attempt_01/output/report.json",
+        "report_sha256": "d856647c4ceef3794fce3776beaddd881599df2e6e2eb7eddd64202318ed6f9b"
+      },
+      "stream_track03_emit20_look160": {
+        "path": "results/streaming_study_20261019/stream_track03_emit20_look160/attempt_01/output/report.json",
+        "report_sha256": "27c57aa565818486adda04a1de4730c6712921c56b3ccd26b64ccbb7ddaee008"
+      },
+      "stream_track03_emit80_look40": {
+        "path": "results/streaming_study_20261019/stream_track03_emit80_look40/attempt_01/output/report.json",
+        "report_sha256": "bdfae589732d149750d7e2770e3c8961ee577de5afc9d52762a40cd18ef31652"
+      },
+      "stream_track03_emit20_look0": {
+        "path": "results/streaming_study_20261019/stream_track03_emit20_look0/attempt_01/output/report.json",
+        "report_sha256": "ba41c241090fc0c5fda456d3f7ac7ce418e4345249bee63ffe37994078a1d433"
+      },
+      "stream_track03_emit20_look40": {
+        "path": "results/streaming_study_20261019/stream_track03_emit20_look40/attempt_01/output/report.json",
+        "report_sha256": "f744377afd1da71edca167010fd637f6e32ce239f36e695209a75d64b33dce1b"
+      }
+    },
+    "inference_source_hashes": {
+      "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+      "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+      "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+      "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+      "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+      "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+      "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+      "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+      "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+      "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+      "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+      "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+      "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+      "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+      "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+    },
+    "runtime": {
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "executable": "python",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchaudio": "2.11.0+cu128",
+        "numpy": "2.5.3",
+        "soundfile": "0.14.0",
+        "musdb": "0.4.3",
+        "museval": "0.4.1",
+        "openunmix": "1.3.0",
+        "BS-RoFormer": "0.3.9",
+        "librosa": "1.0.0"
+      }
+    },
+    "limitations": [
+      "Three short development clips only; one timing trial per track/setting.",
+      "No causal architecture conversion or audio-device end-to-end latency measurement.",
+      "Virtual serial queue follows measured compute; it is not observed hardware latency.",
+      "Pretrained training-song membership undisclosed; no independent generalization claim."
+    ],
+    "analysis_generation": {
+      "created_utc": "2026-10-19T10:48:47.725455+00:00",
+      "source_path": "build_streaming_study_report.py",
+      "source_sha256": "c716acd19d3524e92d99e835f73cf7089df990de3e05b7b603a40d512f5d260e",
+      "run_record_sha256": "e31a0448e9fb39c2bca5f700f372928b4c0060c2944fb1e416dd75c0e9bc6212",
+      "protocol_sha256": "e04df2b5d8a0b566847f112bc5e6ba564a3c4db448f3f306766a0fd8090f8161",
+      "numpy": "2.5.3",
+      "soundfile": "0.14.0",
+      "separate_from_inference_source_hashes": true
+    }
+  },
+  "protocol": {
+    "configuration": {
+      "schema_version": 1,
+      "root": "MUSDB18-HQ",
+      "tracks": [
+        "Actions - One Minute Smile",
+        "Alexander Ross - Goodbye Bolero",
+        "ANiMAL - Rockshow"
+      ],
+      "start_seconds": 60.0,
+      "duration_seconds": 4.0,
+      "sample_rate": 44100,
+      "requested_samples": 176400,
+      "device": "cuda",
+      "precision": "amp",
+      "heads": "vocals",
+      "context_seconds": 2.0,
+      "overlap": 2,
+      "threads": 1,
+      "seed": 2026,
+      "settings": [
+        {
+          "name": "emit20_look0",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.0
+        },
+        {
+          "name": "emit20_look40",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.04
+        },
+        {
+          "name": "emit20_look160",
+          "emit_seconds": 0.02,
+          "lookahead_seconds": 0.16
+        },
+        {
+          "name": "emit80_look40",
+          "emit_seconds": 0.08,
+          "lookahead_seconds": 0.04
+        }
+      ],
+      "timing_trials_per_track_setting": 1,
+      "expected_jobs": 13,
+      "scope": "three short official development clips; simulated file streaming, no training/test/device I/O",
+      "quality_protocol": "whole clip plus one identical contiguous real-context interval shared by all streaming settings and the offline reference; undefined if empty"
+    },
+    "source_hashes": {
+      "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+      "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+      "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+      "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+      "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+      "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+      "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+      "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+      "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+      "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+      "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+      "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+      "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+      "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+      "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+    },
+    "runtime": {
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "executable": "python",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchaudio": "2.11.0+cu128",
+        "numpy": "2.5.3",
+        "soundfile": "0.14.0",
+        "musdb": "0.4.3",
+        "museval": "0.4.1",
+        "openunmix": "1.3.0",
+        "BS-RoFormer": "0.3.9",
+        "librosa": "1.0.0"
+      }
+    },
+    "model_asset_sha256": {
+      "model.ckpt": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+      "config.yaml": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+      "provenance.json": "bd142cc32a0e2cc0f883970c5fe412540665b8dabea960e2635f8041ad6c46d2"
+    },
+    "data": {
+      "metadata": {
+        "kind": "MUSDB18-HQ",
+        "formal_benchmark": true,
+        "source_verification": "user-provided folder; confirm official release provenance"
+      },
+      "segments": [
+        {
+          "track": "Actions - One Minute Smile",
+          "segment": {
+            "start_sample": 2646000,
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "mixture_sum_max_abs_difference": 9.1552734375e-05,
+            "mixture_sum_rms_difference": 4.8925314948297656e-05
+          },
+          "mixture_path": "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+          "reference_path": "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+          "mixture_float32_sha256": "ef4110b1f8a34a7199180131a54971a149cf4b0fac7a30b0f2d8ec0a0fa59ff5",
+          "vocals_float32_sha256": "d51a337e0d415a06a55edacc225440abd59ad0636fcd93343a30d31096d4fd17"
+        },
+        {
+          "track": "Alexander Ross - Goodbye Bolero",
+          "segment": {
+            "start_sample": 2646000,
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "mixture_sum_max_abs_difference": 9.1552734375e-05,
+            "mixture_sum_rms_difference": 4.732431267179236e-05
+          },
+          "mixture_path": "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+          "reference_path": "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+          "mixture_float32_sha256": "d6a6c5904eb2037aa982d6da3c3226b2dac2453631bc05314dd7941fe460a514",
+          "vocals_float32_sha256": "75c20a33f4fd7647634c758d0d9142b9a530bbb8d30e3509b8a7cc3bd2ea403a"
+        },
+        {
+          "track": "ANiMAL - Rockshow",
+          "segment": {
+            "start_sample": 2646000,
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "mixture_sum_max_abs_difference": 9.1552734375e-05,
+            "mixture_sum_rms_difference": 5.3067011913422084e-05
+          },
+          "mixture_path": "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+          "reference_path": "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+          "mixture_float32_sha256": "6ab7e541365dd0ca66257766903b777ba3ae477bc5024d62280089d43ee3199a",
+          "vocals_float32_sha256": "a8afd588f04dc858ebf829b065de606d26fba96e5fe39c9c960781b1ea341a56"
+        }
+      ],
+      "train_inventory_count": 100,
+      "test_set_accessed": false,
+      "pretrained_training_split_verified": false
+    }
+  },
+  "execution": {
+    "identity": "e04df2b5d8a0b566847f112bc5e6ba564a3c4db448f3f306766a0fd8090f8161",
+    "created_utc": "2026-10-19T10:39:57.261787+00:00",
+    "updated_utc": "2026-10-19T10:48:27.048024+00:00",
+    "status": "complete",
+    "context": {
+      "configuration": {
+        "schema_version": 1,
+        "root": "MUSDB18-HQ",
+        "tracks": [
+          "Actions - One Minute Smile",
+          "Alexander Ross - Goodbye Bolero",
+          "ANiMAL - Rockshow"
+        ],
+        "start_seconds": 60.0,
+        "duration_seconds": 4.0,
+        "sample_rate": 44100,
+        "requested_samples": 176400,
+        "device": "cuda",
+        "precision": "amp",
+        "heads": "vocals",
+        "context_seconds": 2.0,
+        "overlap": 2,
+        "threads": 1,
+        "seed": 2026,
+        "settings": [
+          {
+            "name": "emit20_look0",
+            "emit_seconds": 0.02,
+            "lookahead_seconds": 0.0
+          },
+          {
+            "name": "emit20_look40",
+            "emit_seconds": 0.02,
+            "lookahead_seconds": 0.04
+          },
+          {
+            "name": "emit20_look160",
+            "emit_seconds": 0.02,
+            "lookahead_seconds": 0.16
+          },
+          {
+            "name": "emit80_look40",
+            "emit_seconds": 0.08,
+            "lookahead_seconds": 0.04
+          }
+        ],
+        "timing_trials_per_track_setting": 1,
+        "expected_jobs": 13,
+        "scope": "three short official development clips; simulated file streaming, no training/test/device I/O",
+        "quality_protocol": "whole clip plus one identical contiguous real-context interval shared by all streaming settings and the offline reference; undefined if empty"
+      },
+      "source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "runtime": {
+        "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+        "executable": "python",
+        "packages": {
+          "torch": "2.11.0+cu128",
+          "torchaudio": "2.11.0+cu128",
+          "numpy": "2.5.3",
+          "soundfile": "0.14.0",
+          "musdb": "0.4.3",
+          "museval": "0.4.1",
+          "openunmix": "1.3.0",
+          "BS-RoFormer": "0.3.9",
+          "librosa": "1.0.0"
+        }
+      },
+      "model_asset_sha256": {
+        "model.ckpt": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+        "config.yaml": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+        "provenance.json": "bd142cc32a0e2cc0f883970c5fe412540665b8dabea960e2635f8041ad6c46d2"
+      },
+      "data": {
+        "metadata": {
+          "kind": "MUSDB18-HQ",
+          "formal_benchmark": true,
+          "source_verification": "user-provided folder; confirm official release provenance"
+        },
+        "segments": [
+          {
+            "track": "Actions - One Minute Smile",
+            "segment": {
+              "start_sample": 2646000,
+              "samples": 176400,
+              "duration_seconds": 4.0,
+              "mixture_sum_max_abs_difference": 9.1552734375e-05,
+              "mixture_sum_rms_difference": 4.8925314948297656e-05
+            },
+            "mixture_path": "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+            "reference_path": "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+            "mixture_float32_sha256": "ef4110b1f8a34a7199180131a54971a149cf4b0fac7a30b0f2d8ec0a0fa59ff5",
+            "vocals_float32_sha256": "d51a337e0d415a06a55edacc225440abd59ad0636fcd93343a30d31096d4fd17"
+          },
+          {
+            "track": "Alexander Ross - Goodbye Bolero",
+            "segment": {
+              "start_sample": 2646000,
+              "samples": 176400,
+              "duration_seconds": 4.0,
+              "mixture_sum_max_abs_difference": 9.1552734375e-05,
+              "mixture_sum_rms_difference": 4.732431267179236e-05
+            },
+            "mixture_path": "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+            "reference_path": "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+            "mixture_float32_sha256": "d6a6c5904eb2037aa982d6da3c3226b2dac2453631bc05314dd7941fe460a514",
+            "vocals_float32_sha256": "75c20a33f4fd7647634c758d0d9142b9a530bbb8d30e3509b8a7cc3bd2ea403a"
+          },
+          {
+            "track": "ANiMAL - Rockshow",
+            "segment": {
+              "start_sample": 2646000,
+              "samples": 176400,
+              "duration_seconds": 4.0,
+              "mixture_sum_max_abs_difference": 9.1552734375e-05,
+              "mixture_sum_rms_difference": 5.3067011913422084e-05
+            },
+            "mixture_path": "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+            "reference_path": "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+            "mixture_float32_sha256": "6ab7e541365dd0ca66257766903b777ba3ae477bc5024d62280089d43ee3199a",
+            "vocals_float32_sha256": "a8afd588f04dc858ebf829b065de606d26fba96e5fe39c9c960781b1ea341a56"
+          }
+        ],
+        "train_inventory_count": 100,
+        "test_set_accessed": false,
+        "pretrained_training_split_verified": false
+      }
+    },
+    "job_count": 13
+  },
+  "jobs": {
+    "offline_amp2s": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "evaluate_project.py",
+        "--root",
+        "MUSDB18-HQ",
+        "--subset",
+        "train",
+        "--system",
+        "bsroformer",
+        "--bs-heads",
+        "vocals",
+        "--precision",
+        "amp",
+        "--chunk-seconds",
+        "2",
+        "--overlap",
+        "2",
+        "--device",
+        "cuda",
+        "--threads",
+        "1",
+        "--seed",
+        "2026",
+        "--condition",
+        "mixture",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--save-estimates",
+        "--out",
+        "results/streaming_study_20261019/offline_amp2s/attempt_01/output",
+        "--track",
+        "Actions - One Minute Smile",
+        "--track",
+        "Alexander Ross - Goodbye Bolero",
+        "--track",
+        "ANiMAL - Rockshow"
+      ],
+      "started_utc": "2026-10-19T10:39:58.857427+00:00",
+      "log": "results/streaming_study_20261019/offline_amp2s/attempt_01/console.log",
+      "stage": "offline",
+      "track": null,
+      "setting": null,
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 53, 11.81, 1890, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/offline_amp2s/attempt_01/output/report.json",
+      "artifact_sha256": "65dd64a0c02ab3a1ffe592233227b0b54e276eaf8881940619b430ea11fc8cd6",
+      "finished_utc": "2026-10-19T10:40:10.251806+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 57, 53.70, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/offline_amp2s.json",
+      "public_report_sha256": "8e3db519e27592e7524c14369f84dad2632133c53838cef903ebf8009a1c4fb5",
+      "original_report_sha256": "65dd64a0c02ab3a1ffe592233227b0b54e276eaf8881940619b430ea11fc8cd6"
+    },
+    "stream_track01_emit20_look0": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track01_emit20_look0/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.0",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:40:10.447450+00:00",
+      "log": "results/streaming_study_20261019/stream_track01_emit20_look0/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Actions - One Minute Smile",
+      "setting": {
+        "name": "emit20_look0",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.0
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 57, 53.70, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track01_emit20_look0/attempt_01/output/report.json",
+      "artifact_sha256": "ee36ad9d38886e135f09eec64d141d082c7c9e240448af92ec23ee9e417aaa77",
+      "finished_utc": "2026-10-19T10:41:00.032508+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 60.44, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track01_emit20_look0.json",
+      "public_report_sha256": "512fda57af3ec23160e017d0fa53ce533f46dbf94f7863991e86d6a96e85e8ce",
+      "original_report_sha256": "ee36ad9d38886e135f09eec64d141d082c7c9e240448af92ec23ee9e417aaa77"
+    },
+    "stream_track01_emit20_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track01_emit20_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:41:00.219860+00:00",
+      "log": "results/streaming_study_20261019/stream_track01_emit20_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Actions - One Minute Smile",
+      "setting": {
+        "name": "emit20_look40",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 60.44, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track01_emit20_look40/attempt_01/output/report.json",
+      "artifact_sha256": "440fb9f5a66250ac137fd0e00df94f4a7f02e3e53ba1ae191b3c4e1ded5a808b",
+      "finished_utc": "2026-10-19T10:41:48.901530+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 64.89, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track01_emit20_look40.json",
+      "public_report_sha256": "1d3f1f3f5da5e44b10fca9e733fab95426b462530729a3ec5f21982734d12afe",
+      "original_report_sha256": "440fb9f5a66250ac137fd0e00df94f4a7f02e3e53ba1ae191b3c4e1ded5a808b"
+    },
+    "stream_track01_emit20_look160": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track01_emit20_look160/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.16",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:41:49.008752+00:00",
+      "log": "results/streaming_study_20261019/stream_track01_emit20_look160/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Actions - One Minute Smile",
+      "setting": {
+        "name": "emit20_look160",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.16
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 64.89, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track01_emit20_look160/attempt_01/output/report.json",
+      "artifact_sha256": "3dd53ae81f23571ef79b8c49755fed67814ee8c404b89b12db990149c575651c",
+      "finished_utc": "2026-10-19T10:42:38.043612+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 58.68, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track01_emit20_look160.json",
+      "public_report_sha256": "c72f1da66c34d5ea1d083403d5bf97431e54f00d56fd4a99885937fcb0aff5e4",
+      "original_report_sha256": "3dd53ae81f23571ef79b8c49755fed67814ee8c404b89b12db990149c575651c"
+    },
+    "stream_track01_emit80_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Actions - One Minute Smile/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track01_emit80_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.08",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:42:38.147708+00:00",
+      "log": "results/streaming_study_20261019/stream_track01_emit80_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Actions - One Minute Smile",
+      "setting": {
+        "name": "emit80_look40",
+        "emit_seconds": 0.08,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 58.68, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track01_emit80_look40/attempt_01/output/report.json",
+      "artifact_sha256": "cf13352dfc81bfed17f44664543659e2e7ce0402275c562f5d6a7db7d48edd80",
+      "finished_utc": "2026-10-19T10:42:55.787060+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 60, 45.47, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track01_emit80_look40.json",
+      "public_report_sha256": "817589ee1386b7764ac2a14f14e65a219f1dafc12b4ac41ed6391da950e13c2a",
+      "original_report_sha256": "cf13352dfc81bfed17f44664543659e2e7ce0402275c562f5d6a7db7d48edd80"
+    },
+    "stream_track02_emit20_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track02_emit20_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:42:55.899548+00:00",
+      "log": "results/streaming_study_20261019/stream_track02_emit20_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Alexander Ross - Goodbye Bolero",
+      "setting": {
+        "name": "emit20_look40",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 60, 45.47, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track02_emit20_look40/attempt_01/output/report.json",
+      "artifact_sha256": "9e9c7c9f525a34bf9e424561c940cdd5171de30252f624320807f8f53aa163cc",
+      "finished_utc": "2026-10-19T10:43:44.981167+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 63.93, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track02_emit20_look40.json",
+      "public_report_sha256": "23707299c996fe507e700be8a8df9a422cf2499437cb55d71d81815f0e8a45f1",
+      "original_report_sha256": "9e9c7c9f525a34bf9e424561c940cdd5171de30252f624320807f8f53aa163cc"
+    },
+    "stream_track02_emit20_look160": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track02_emit20_look160/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.16",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:43:45.109115+00:00",
+      "log": "results/streaming_study_20261019/stream_track02_emit20_look160/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Alexander Ross - Goodbye Bolero",
+      "setting": {
+        "name": "emit20_look160",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.16
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 36.31, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track02_emit20_look160/attempt_01/output/report.json",
+      "artifact_sha256": "7c92176cbda1165d6550fb715b5f84464dffaa0ddc86335137f1100562380141",
+      "finished_utc": "2026-10-19T10:44:34.487868+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 42.25, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track02_emit20_look160.json",
+      "public_report_sha256": "ec4feb0248ae03418d3629fb024d5a9c05184fefe47d162a37702e23afe3b20c",
+      "original_report_sha256": "7c92176cbda1165d6550fb715b5f84464dffaa0ddc86335137f1100562380141"
+    },
+    "stream_track02_emit80_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track02_emit80_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.08",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:44:34.664757+00:00",
+      "log": "results/streaming_study_20261019/stream_track02_emit80_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Alexander Ross - Goodbye Bolero",
+      "setting": {
+        "name": "emit80_look40",
+        "emit_seconds": 0.08,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 42.25, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track02_emit80_look40/attempt_01/output/report.json",
+      "artifact_sha256": "1cc17d0edb94e8a794b76fd5ca01fb75f2d58c1a0de0366eb5640f02ff31c9df",
+      "finished_utc": "2026-10-19T10:44:52.421816+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 45.47, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track02_emit80_look40.json",
+      "public_report_sha256": "89b0564a863b8338a0a651192acd05acb964b68303e8ee20ce5c71d62f946e11",
+      "original_report_sha256": "1cc17d0edb94e8a794b76fd5ca01fb75f2d58c1a0de0366eb5640f02ff31c9df"
+    },
+    "stream_track02_emit20_look0": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/Alexander Ross - Goodbye Bolero/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track02_emit20_look0/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.0",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:44:52.524839+00:00",
+      "log": "results/streaming_study_20261019/stream_track02_emit20_look0/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "Alexander Ross - Goodbye Bolero",
+      "setting": {
+        "name": "emit20_look0",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.0
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 45.47, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track02_emit20_look0/attempt_01/output/report.json",
+      "artifact_sha256": "d856647c4ceef3794fce3776beaddd881599df2e6e2eb7eddd64202318ed6f9b",
+      "finished_utc": "2026-10-19T10:45:41.505476+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 36.96, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track02_emit20_look0.json",
+      "public_report_sha256": "fb04b1c422f99ace279cd2f3fdeff416d461eb820bc36a67c4231673380c4a5a",
+      "original_report_sha256": "d856647c4ceef3794fce3776beaddd881599df2e6e2eb7eddd64202318ed6f9b"
+    },
+    "stream_track03_emit20_look160": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track03_emit20_look160/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.16",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:45:41.701320+00:00",
+      "log": "results/streaming_study_20261019/stream_track03_emit20_look160/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "ANiMAL - Rockshow",
+      "setting": {
+        "name": "emit20_look160",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.16
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 36.96, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track03_emit20_look160/attempt_01/output/report.json",
+      "artifact_sha256": "27c57aa565818486adda04a1de4730c6712921c56b3ccd26b64ccbb7ddaee008",
+      "finished_utc": "2026-10-19T10:46:30.486179+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 57.52, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track03_emit20_look160.json",
+      "public_report_sha256": "4700c23fb1cf20d0d656e24f73ded64ce51c6b85af4fdb274afe360b8f83d23b",
+      "original_report_sha256": "27c57aa565818486adda04a1de4730c6712921c56b3ccd26b64ccbb7ddaee008"
+    },
+    "stream_track03_emit80_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track03_emit80_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.08",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:46:30.611146+00:00",
+      "log": "results/streaming_study_20261019/stream_track03_emit80_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "ANiMAL - Rockshow",
+      "setting": {
+        "name": "emit80_look40",
+        "emit_seconds": 0.08,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 57.52, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track03_emit80_look40/attempt_01/output/report.json",
+      "artifact_sha256": "bdfae589732d149750d7e2770e3c8961ee577de5afc9d52762a40cd18ef31652",
+      "finished_utc": "2026-10-19T10:46:48.319594+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 43.90, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track03_emit80_look40.json",
+      "public_report_sha256": "f556c8b97fa611954872594583d3f86e58ee26955e616a25b15931744764deb2",
+      "original_report_sha256": "bdfae589732d149750d7e2770e3c8961ee577de5afc9d52762a40cd18ef31652"
+    },
+    "stream_track03_emit20_look0": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track03_emit20_look0/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.0",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:46:48.429616+00:00",
+      "log": "results/streaming_study_20261019/stream_track03_emit20_look0/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "ANiMAL - Rockshow",
+      "setting": {
+        "name": "emit20_look0",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.0
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 43.90, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track03_emit20_look0/attempt_01/output/report.json",
+      "artifact_sha256": "ba41c241090fc0c5fda456d3f7ac7ce418e4345249bee63ffe37994078a1d433",
+      "finished_utc": "2026-10-19T10:47:37.345956+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 57.78, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track03_emit20_look0.json",
+      "public_report_sha256": "26cf1ebaa3edfc0a1dd8e1f47d3d23322594a5c184fe0b7488dd497584cfda28",
+      "original_report_sha256": "ba41c241090fc0c5fda456d3f7ac7ce418e4345249bee63ffe37994078a1d433"
+    },
+    "stream_track03_emit20_look40": {
+      "status": "complete",
+      "kind": "evaluation",
+      "attempt": 1,
+      "command": [
+        "python",
+        "offline_stream_demo.py",
+        "--input",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/mixture.wav",
+        "--reference",
+        "MUSDB18-HQ/train/ANiMAL - Rockshow/vocals.wav",
+        "--output",
+        "results/streaming_study_20261019/stream_track03_emit20_look40/attempt_01/output",
+        "--start",
+        "60.0",
+        "--duration",
+        "4.0",
+        "--context-seconds",
+        "2",
+        "--emit-seconds",
+        "0.02",
+        "--lookahead-seconds",
+        "0.04",
+        "--device",
+        "cuda",
+        "--precision",
+        "amp",
+        "--heads",
+        "vocals"
+      ],
+      "started_utc": "2026-10-19T10:47:37.547713+00:00",
+      "log": "results/streaming_study_20261019/stream_track03_emit20_look40/attempt_01/console.log",
+      "stage": "streaming",
+      "track": "ANiMAL - Rockshow",
+      "setting": {
+        "name": "emit20_look40",
+        "emit_seconds": 0.02,
+        "lookahead_seconds": 0.04
+      },
+      "repeat": 1,
+      "gpu_before": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 61, 32.83, 2670, 8201, 0, 0"
+      },
+      "inference_source_hashes": {
+        "evaluate_project.py": "5a7c9369b8f08624211d9fc52ad411dca924ecd7c849fa9aecc12b453e20f90c",
+        "offline_stream_demo.py": "ba767060888be1f3aee7df1d7f613a80728b21c5c94a897cebb4dce5b82041a0",
+        "run_project.py": "11a09f4317d91587b6f5080ad1447fc296ea9debe32b304003b3191b76a4b44d",
+        "run_streaming_study.py": "fc6ead5cee88bea4928a73759ad13928fcedd238ad1e054e581053032ed76154",
+        "vocalstream/__init__.py": "66c7680b57412b1079f29f9e490bdf8ab660841b94b55762ff92a43fff3097bf",
+        "vocalstream/baselines.py": "6caed191cfd7aca3500d6cc4ff0034c79c980df2ca2f9fd87901d3c18dfc8d27",
+        "vocalstream/bsroformer.py": "929a9641f401a1fe5e62b9acc52ea6a8be6688a50f419d697cd776fba7ce9e4c",
+        "vocalstream/conditions.py": "5c1708291f1ac1feb13f18236afb580b2174e97fd1d0157553d0e10e0cf7a985",
+        "vocalstream/data.py": "fa5e4c7f81cc0a6b7e31ef65ae273d1086de52124465dcdc76323622c2059919",
+        "vocalstream/metrics.py": "2563d70081eed12e39f3cf0ff73b72b173ec6c7f58ede1a8fdd88685e34968af",
+        "vocalstream/roformer.py": "c601cb590c0244a37a9464f5739e7dfd202afb6109c2ecd828db37ee38ed1265",
+        "vocalstream/streaming.py": "9138e98b658aab3bcc363f311d48e2588b2f5994c2673e4829a458fe0cd1e0b3",
+        "vocalstream/vendor/zfturbo_bsroformer/__init__.py": "28e227018912550f47f5153a2bc20701638cf70cdbf1defc1b258d71d8019bbb",
+        "vocalstream/vendor/zfturbo_bsroformer/attend.py": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+        "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+      },
+      "artifact": "results/streaming_study_20261019/stream_track03_emit20_look40/attempt_01/output/report.json",
+      "artifact_sha256": "f744377afd1da71edca167010fd637f6e32ce239f36e695209a75d64b33dce1b",
+      "finished_utc": "2026-10-19T10:48:26.390869+00:00",
+      "gpu_after": {
+        "columns": "name,temp_C,power_W,graphics_MHz,memory_MHz,utilization_percent,memory_used_MiB",
+        "value": "NVIDIA GeForce RTX 4060 Laptop GPU, 62, 59.44, 2670, 8201, 0, 0"
+      },
+      "public_report": "streaming_study/jobs/stream_track03_emit20_look40.json",
+      "public_report_sha256": "f8933db60d354a2b045726bfc269942c9e9ef458a98c499295d0b8bb89a6d94c",
+      "original_report_sha256": "f744377afd1da71edca167010fd637f6e32ce239f36e695209a75d64b33dce1b"
+    }
+  }
+}

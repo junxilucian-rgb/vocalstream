@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project": "VocalStream: vocal quality, compute and algorithmic delay",
+  "seed": 2026,
+  "sample_rate": 44100,
+  "threads": 1,
+  "training_device": "cuda",
+  "causal_evaluation_device": "cpu",
+  "official_validation_source": "https://github.com/sigsep/sigsep-mus-db/blob/master/musdb/configs/mus.yaml",
+  "validation_tracks": [
+    "Actions - One Minute Smile", "Clara Berry And Wooldog - Waltz For My Victims",
+    "Johnny Lokke - Promises & Lies", "Patrick Talbot - A Reason To Leave",
+    "Triviul - Angelsaint", "Alexander Ross - Goodbye Bolero",
+    "Fergessen - Nos Palpitants", "Leaf - Summerghost", "Skelpolu - Human Mistakes",
+    "Young Griffo - Pennies", "ANiMAL - Rockshow", "James May - On The Line",
+    "Meaxic - Take A Step", "Traffic Experiment - Sirens"
+  ],
+  "candidates": [
+    {"name": "fft512_h32", "n_fft": 512, "hop_length": 128, "hidden_size": 32},
+    {"name": "fft1024_h32", "n_fft": 1024, "hop_length": 256, "hidden_size": 32},
+    {"name": "fft2048_h32", "n_fft": 2048, "hop_length": 512, "hidden_size": 32},
+    {"name": "fft1024_h64", "n_fft": 1024, "hop_length": 256, "hidden_size": 64}
+  ],
+  "references": [
+    {"name": "openunmix_hq", "system": "openunmix", "device": "cpu", "model": "umxhq", "niter": 1},
+    {"name": "melroformer", "system": "melroformer", "device": "cuda", "overlap": 2, "precision": "fp32", "tta": false}
+  ],
+  "profiles": {
+    "pilot": {
+      "steps": 200, "batch_size": 1, "crop_seconds": 2, "validate_every": 25,
+      "validation_track_limit": 3, "evaluation_seconds": 7, "timing_repeats": 1,
+      "conditions": [{"name": "mixture", "mode": "mixture"}],
+      "purpose": "Public preview or partial data; workflow and initial learning only."
+    },
+    "development": {
+      "steps": 5000, "batch_size": 4, "crop_seconds": 4, "validate_every": 250,
+      "validation_track_limit": null, "evaluation_seconds": 30, "timing_repeats": 3,
+      "conditions": [
+        {"name": "mixture", "mode": "mixture"},
+        {"name": "bleed_minus20", "mode": "bleed", "bleed_db": -20},
+        {"name": "bleed_minus10", "mode": "bleed", "bleed_db": -10}
+      ],
+      "purpose": "HQ train/validation development budget, not a guarantee of convergence."
+    }
+  },
+  "final_protocol": {
+    "subset": "test", "expected_tracks": 50, "evaluation_seconds": null,
+    "timing_repeats": 3, "bsseval_for_mixture": true,
+    "conditions": [
+      {"name": "mixture", "mode": "mixture"},
+      {"name": "bleed_minus20", "mode": "bleed", "bleed_db": -20},
+      {"name": "bleed_minus10", "mode": "bleed", "bleed_db": -10}
+    ]
+  },
+  "selection_guidance": {
+    "basis": "validation only: SI-SDR, listening, per-block RTR and delay; record reason before test",
+    "first_sample_ready_target_ms": 25,
+    "cpu_p95_rtr_target": 1,
+    "deadline_miss_fraction_target": 0,
+    "target_status": "Project engineering targets, not Yamaha requirements or achieved results."
+  }
+}

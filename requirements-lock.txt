@@ -1,0 +1,5 @@
+# Compatibility filename. The former early CPU environment was inconsistent
+# (torch and torchaudio versions differed) and is not a supported runtime.
+# Use pyproject.toml + the README install steps for a fresh environment.
+# requirements-roformer-lock.txt preserves the recorded CUDA experiment runtime.
+-e .

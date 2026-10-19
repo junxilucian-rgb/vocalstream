@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "root": "data/musdb18-hq",
+  "seed": 2026,
+  "device": "cuda",
+  "threads": 1,
+  "start_seconds": 60,
+  "duration_seconds": 30,
+  "timing_repeats": 3,
+  "timing_tracks": ["ANiMAL - Rockshow", "Actions - One Minute Smile", "Alexander Ross - Goodbye Bolero"],
+  "models": [
+    {"name": "openunmix_hq", "system": "openunmix", "model": "umxhq", "niter": 1},
+    {"name": "bs_fp32", "system": "bsroformer", "precision": "fp32", "overlap": 2},
+    {"name": "bs_amp", "system": "bsroformer", "precision": "amp", "overlap": 2},
+    {"name": "bs_2s", "system": "bsroformer", "precision": "fp32", "overlap": 2, "chunk_seconds": 2}
+  ],
+  "conditions": [
+    {"name": "clean_vocal", "mode": "clean"},
+    {"name": "bleed_minus30", "mode": "bleed", "bleed_db": -30},
+    {"name": "bleed_minus20", "mode": "bleed", "bleed_db": -20},
+    {"name": "bleed_minus10", "mode": "bleed", "bleed_db": -10}
+  ],
+  "robustness_models": ["openunmix_hq", "bs_amp"],
+  "timing_models": ["bs_fp32", "bs_amp"],
+  "protocol": "All 14 official validation songs, fixed 60-90 second segments. Three independent timing runs on the same three songs. No test inference or custom-model training.",
+  "predeclared_exclusion": "Overlap=4 is not expanded in this round because the previous pilot doubled compute for only 0.008 dB median gain; its original result remains reported.",
+  "limitations": ["Not whole-song or official test-set benchmarking", "Public pretrained BS training split is undocumented", "Scaled backing does not simulate physical microphone acoustics", "Original vocals can contain production effects", "Offline context is not causal or device latency"]
+}

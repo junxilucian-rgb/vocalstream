@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "root": "data/musdb18-hq",
+  "seed": 2026,
+  "device": "cuda",
+  "threads": 1,
+  "start_seconds": 60,
+  "duration_seconds": 30,
+  "overlap": 2,
+  "timing_repeats": 3,
+  "timing_tracks": ["Actions - One Minute Smile", "Alexander Ross - Goodbye Bolero", "ANiMAL - Rockshow"],
+  "models": [
+    {"name": "all_fp32", "heads": "all", "precision": "fp32"},
+    {"name": "vocal_fp32", "heads": "vocals", "precision": "fp32"},
+    {"name": "all_amp", "heads": "all", "precision": "amp"},
+    {"name": "vocal_amp", "heads": "vocals", "precision": "amp"}
+  ],
+  "numerical_comparison": {
+    "scope": "same-precision vocal-only output versus four-head vocal output on identical input, not perceptual equivalence",
+    "max_normalized_waveform_rmse": 0.00001,
+    "max_absolute_per_song_si_sdr_delta_db": 0.001
+  },
+  "protocol": "All 14 official validation songs, fixed 60-90s, full pretrained 11s context, no TTA, four-head strict load before optional vocal-head retention. Four fresh-process quality runs plus three fresh-process timing repeats per model. No test inference or training.",
+  "limitations": ["Pretrained training-song list undisclosed", "Fixed development excerpts only", "Four-stem and vocal-only use different ISTFT batch shapes", "Head selection does not remove bidirectional attention or establish low latency", "Latency and audio-device I/O not measured by this experiment"]
+}

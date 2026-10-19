@@ -1,0 +1,926 @@
+{
+  "status": "complete",
+  "created_utc": "20261012T202247Z_6d99bf1a",
+  "configuration": {
+    "root": "MUSDB18-HQ",
+    "input": null,
+    "system": "openunmix",
+    "chunk_seconds": null,
+    "model": "umxhq",
+    "checkpoint": null,
+    "overlap": 8,
+    "precision": "fp32",
+    "tta": false,
+    "niter": 1,
+    "subset": "train",
+    "track": [
+      "ANiMAL - Rockshow",
+      "Actions - One Minute Smile",
+      "Alexander Ross - Goodbye Bolero",
+      "Clara Berry And Wooldog - Waltz For My Victims",
+      "Fergessen - Nos Palpitants",
+      "James May - On The Line",
+      "Johnny Lokke - Promises & Lies",
+      "Leaf - Summerghost",
+      "Meaxic - Take A Step",
+      "Patrick Talbot - A Reason To Leave",
+      "Skelpolu - Human Mistakes",
+      "Traffic Experiment - Sirens",
+      "Triviul - Angelsaint",
+      "Young Griffo - Pennies"
+    ],
+    "limit": null,
+    "start": 60.0,
+    "duration": 30.0,
+    "condition": "mixture",
+    "snr_db": 10,
+    "bleed_db": -20,
+    "rt60": 0.25,
+    "seed": 2026,
+    "device": "cuda",
+    "threads": 1,
+    "bsseval": false,
+    "save_audio": false,
+    "save_audio_limit": null,
+    "save_estimates": false,
+    "out": "results/refinement_20261012/expanded_openunmix_hq/attempt_01/output"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpu_count": 20,
+    "torch_threads": 1,
+    "cuda_available": true,
+    "versions": {
+      "torch": "2.11.0+cu128",
+      "torchaudio": "2.11.0+cu128",
+      "openunmix": "1.3.0",
+      "soundfile": "0.14.0",
+      "numpy": "2.5.3",
+      "museval": "0.4.1",
+      "BS-RoFormer": "0.3.9",
+      "librosa": "1.0.0",
+      "einops": "0.8.2"
+    },
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "tracks": [
+    {
+      "track": "Actions - One Minute Smile",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.942115052995829e-05,
+        "processed_input_float32_sha256": "509961be317fa26e4676926b7b6ba464b7f184ed0be6cbaebf2eeb0b042dac10",
+        "reference_float32_sha256": "0abe0edadc66e6eac02f7841e0a980ce0363c4eb9ae86f31f74e2e743ef534cd"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 5.359214716704399,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -3.377281227309434,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 8.736495944013832,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 6.401516124678696,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.4785465545853974,
+        "reference_projection_gain": 0.8265818088493175,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.511226000264287,
+        "inference_rtf": 0.017040866675476232,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.5322372997179627,
+        "processing_call_rtf": 0.01774124332393209,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.975067138671875,
+      "estimate_peak": 0.41532576084136963
+    },
+    {
+      "track": "Alexander Ross - Goodbye Bolero",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.929447072349817e-05,
+        "processed_input_float32_sha256": "7959e0f51b1d6eb582662b289113213fc73f8befdc63078c96cf9719cc65db76",
+        "reference_float32_sha256": "2b84c98b018fea656ee0b1976cf5c2529d778d98dddd77b978641e600fe155b7"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 6.974390966356157,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -3.5058321713139415,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 10.480223137670098,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 7.584367638725055,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.417620316390904,
+        "reference_projection_gain": 0.910547929815093,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.26329120015725493,
+        "inference_rtf": 0.008776373338575165,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.27917010011151433,
+        "processing_call_rtf": 0.009305670003717145,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.702301025390625,
+      "estimate_peak": 0.37880516052246094
+    },
+    {
+      "track": "ANiMAL - Rockshow",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.0164842098948694e-05,
+        "processed_input_float32_sha256": "5c4bbfe3105ec0bf1cd007372204cf696a13998f97170886760ae69c0209b406",
+        "reference_float32_sha256": "5caa0adb1f18a1ed2b49b4d8074dbb0ed64219d0ba594bd71e20ccb2797f99a0"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 1.7413646090125214,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -7.345983033253599,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 9.08734764226612,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 2.515344143525608,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.7485706457837807,
+        "reference_projection_gain": 0.9077788547320081,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.32890670001506805,
+        "inference_rtf": 0.010963556667168936,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.3533218000084162,
+        "processing_call_rtf": 0.011777393333613873,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.900299072265625,
+      "estimate_peak": 0.5661396384239197
+    },
+    {
+      "track": "Clara Berry And Wooldog - Waltz For My Victims",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.941801322210711e-05,
+        "processed_input_float32_sha256": "38d95be202cd09a84b154d07fe51977ad7282f08a6d2aa747f04c6d822fd4ad0",
+        "reference_float32_sha256": "4406c2133df5bb25db83f4370bb48b72a0a45a4f470f62c9d3bbf1172e342ae3"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 4.908498747301917,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -8.590704765545688,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 13.499203512847604,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 5.884705760825961,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.5078842112080058,
+        "reference_projection_gain": 0.8581108507607034,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.3700687000527978,
+        "inference_rtf": 0.012335623335093259,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.38666489999741316,
+        "processing_call_rtf": 0.012888829999913773,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.998626708984375,
+      "estimate_peak": 0.26764976978302
+    },
+    {
+      "track": "Fergessen - Nos Palpitants",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.454605469260525e-05,
+        "processed_input_float32_sha256": "9a4ca58b32e72aeb361554835ff9642cc1e55e2796c010f5763059c59fbeccbf",
+        "reference_float32_sha256": "93bd733e37bee3f89cc7e8aaa71a165407c615d940133f1e9a03c16cdfcbdc01"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 9.178524788811366,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -0.18213288167214864,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 9.360657670483514,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 9.501566181443287,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.3349050458783869,
+        "reference_projection_gain": 0.9545959302465383,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.17628209991380572,
+        "inference_rtf": 0.005876069997126857,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.19197330018505454,
+        "processing_call_rtf": 0.0063991100061684845,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.808441162109375,
+      "estimate_peak": 0.5170397162437439
+    },
+    {
+      "track": "James May - On The Line",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.07573636542599e-05,
+        "processed_input_float32_sha256": "b8a4414812b67e9c13307e545443a0c51fc52779a4947abe7d970614569ae697",
+        "reference_float32_sha256": "08a910afc8e484ba0640b6defc55b5d5cbfc609e03739b02e86bc222ec235fed"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 7.366747720233835,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -4.741487149624532,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 12.108234869858368,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 7.953160968042888,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.40025977932582624,
+        "reference_projection_gain": 0.9116698776907823,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.36677429964765906,
+        "inference_rtf": 0.012225809988255303,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.3817927003838122,
+        "processing_call_rtf": 0.012726423346127074,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.775634765625,
+      "estimate_peak": 0.43819501996040344
+    },
+    {
+      "track": "Johnny Lokke - Promises & Lies",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.301014811402296e-05,
+        "processed_input_float32_sha256": "ac34c572ffc76110dfc71681c52dd021dea5fa6247d0eee86d2ee5b493734f3a",
+        "reference_float32_sha256": "2d4980619a36d686bb3ddf36f0c9ac1f0ce68d4420b96c9f17fc420a0c098e0f"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 6.963122043807073,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -5.319941695166892,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 12.283063738973965,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 7.668750732809297,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.41358279452559116,
+        "reference_projection_gain": 0.8867088739142188,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.35083580017089844,
+        "inference_rtf": 0.011694526672363282,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.362790800165385,
+        "processing_call_rtf": 0.012093026672179501,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 1.0,
+      "estimate_peak": 0.5732166171073914
+    },
+    {
+      "track": "Leaf - Summerghost",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.2977566841922085e-05,
+        "processed_input_float32_sha256": "a623a6159a4505b40122f7bc8697a8260af9ef6b097b24ad6bcb3f19559bb40f",
+        "reference_float32_sha256": "b5394c6312c6e055abcc71b5b0a76ace6e75f2edf176eda9a194fdc18f196c7c"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 6.275647329488758,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -4.12519586559206,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 10.400843195080817,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 7.192159786825345,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.4369100258541833,
+        "reference_projection_gain": 0.8191572569913022,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.21791489981114864,
+        "inference_rtf": 0.0072638299937049546,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.23085430031642318,
+        "processing_call_rtf": 0.007695143343880773,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.999969482421875,
+      "estimate_peak": 0.3220980167388916
+    },
+    {
+      "track": "Meaxic - Take A Step",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.984892225674639e-05,
+        "processed_input_float32_sha256": "27cb0c65490498449bd7f14c4431336024f0ac3260e0adcbf587b60e5641ebbd",
+        "reference_float32_sha256": "5bdb1d040fcd1c072cbd82d09cfeec6928e26e6c64fb6f3757c72baee44ef742"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 9.290015012791672,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -4.0613519005879875,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 13.35136691337966,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 9.752670868114661,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.32536172099408,
+        "reference_projection_gain": 0.9159340026003883,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.4247338999994099,
+        "inference_rtf": 0.014157796666646997,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.440958000253886,
+        "processing_call_rtf": 0.014698600008462867,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.907562255859375,
+      "estimate_peak": 0.501133382320404
+    },
+    {
+      "track": "Patrick Talbot - A Reason To Leave",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.134268779684297e-05,
+        "processed_input_float32_sha256": "bcfdc9f238079d3cdcd315935121f8a39b80c60bfff5df560e231fd57d6b7b61",
+        "reference_float32_sha256": "99333bf21f7f18f9cb5398261bf217b938c6e02c5ed719e1b380182bb6a39354"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 12.375318836232285,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -0.37136999867542575,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 12.746688834907712,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 12.56788387319784,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.2352912659210578,
+        "reference_projection_gain": 0.970178182828754,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.36975330021232367,
+        "inference_rtf": 0.012325110007077455,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.385521600022912,
+        "processing_call_rtf": 0.012850720000763734,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.7879638671875,
+      "estimate_peak": 0.5691362619400024
+    },
+    {
+      "track": "Skelpolu - Human Mistakes",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.9626682119191665e-05,
+        "processed_input_float32_sha256": "85b4630b1406087c9a8151dc52020e6b53ff123fbeb6261d5f9b1ef42950d722",
+        "reference_float32_sha256": "8bf6bc9ffb275cab3e371c19a6574be2f667997ba9db0a09adfa81d6f7bc7078"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": -6.999272135360114,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -9.98908804182631,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 2.9898159064661964,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 0.7880531286342564,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.9132661135093679,
+        "reference_projection_gain": 0.1580442854875599,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.36718069994822145,
+        "inference_rtf": 0.012239356664940715,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.3825469999574125,
+        "processing_call_rtf": 0.012751566665247082,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.7567138671875,
+      "estimate_peak": 0.2666752338409424
+    },
+    {
+      "track": "Traffic Experiment - Sirens",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.253965284452464e-05,
+        "processed_input_float32_sha256": "1c90db505e6d82e9135d6316f060a87625b2cd8147b5cb4665af3bd71373b433",
+        "reference_float32_sha256": "638dd91c9f28d7fe432124d62940767b0497b8c896d5ae9dea2d103d0ac1e949"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 2.779109995460476,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -3.8258695101528173,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 6.604979505613294,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 4.54127217058563,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.5928384886941579,
+        "reference_projection_gain": 0.7184145511272662,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.3827533000148833,
+        "inference_rtf": 0.012758443333829443,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.3980685998685658,
+        "processing_call_rtf": 0.013268953328952194,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.798828125,
+      "estimate_peak": 0.33294248580932617
+    },
+    {
+      "track": "Triviul - Angelsaint",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.227999997984059e-05,
+        "processed_input_float32_sha256": "95aadf54556ce65143da409664bc55b4f72aefb6df43a462b63caba22d2d6398",
+        "reference_float32_sha256": "c53c9e4893e5dcbdaf433562696084637b767607d2960618f817aa4893e72891"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 4.387663190104501,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -2.7170269100064997,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 7.104690100111,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 5.735768034402912,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.5166680405329807,
+        "reference_projection_gain": 0.7372638376272485,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.34792720014229417,
+        "inference_rtf": 0.011597573338076473,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.3640390997752547,
+        "processing_call_rtf": 0.012134636659175158,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.918304443359375,
+      "estimate_peak": 0.42641401290893555
+    },
+    {
+      "track": "Young Griffo - Pennies",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 1323000,
+        "duration_seconds": 30.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.0910961344641024e-05,
+        "processed_input_float32_sha256": "4a5024526960919ac4fbe75864b93f5aa913975f1085dd6d0112a5d02805c082",
+        "reference_float32_sha256": "62f3159df48314ae8b948cf59a9181ae05954516fb67e3583b74004c1ddbefcd"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 7.646004772838877,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -5.175355494590783,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 12.821360267429661,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 8.291704210441207,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.38495927653454576,
+        "reference_projection_gain": 0.8885968352553482,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 1323000,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.38115209992974997,
+        "inference_rtf": 0.012705069997658332,
+        "scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers",
+        "block_rtr": null,
+        "processing_call_seconds": 0.395764899905771,
+        "processing_call_rtf": 0.013192163330192368,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.943603515625,
+      "estimate_peak": 0.4377744495868683
+    }
+  ],
+  "end_to_end_audio_latency_measured": false,
+  "stage": "complete",
+  "model": {
+    "name": "umxhq",
+    "niter": 1,
+    "parameters": 8897444,
+    "sample_rate": 44100,
+    "load_seconds": 0.7309469003230333,
+    "warmup_seconds": 0.7815740001387894,
+    "streaming": false,
+    "algorithmic_latency_ms": null,
+    "latency_reason": "Offline bidirectional LSTM uses future frames; no causal streaming latency claim",
+    "timing_scope": "STFT + separator + Wiener + ISTFT; excludes load, file I/O and device transfers"
+  },
+  "dataset_metadata": {
+    "kind": "MUSDB18-HQ",
+    "formal_benchmark": true,
+    "source_verification": "user-provided folder; confirm official release provenance"
+  },
+  "dataset": "MUSDB18-HQ",
+  "benchmark_protocol": "pilot_or_demo",
+  "aggregate": {
+    "si_sdr_track_median_db": 6.619384686647916,
+    "valid_si_sdr_tracks": 14,
+    "track_count": 14,
+    "si_sdr_aggregation": "median of one whole-segment joint-stereo score per selected track",
+    "bsseval_v4_median_tracks_median_frames_vocals_sdr_db": null,
+    "valid_bsseval_v4_sdr_tracks": 0
+  }
+}

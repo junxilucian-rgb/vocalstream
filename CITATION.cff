@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, cite this repository and the underlying model and dataset papers."
+title: "VocalStream: vocal separation quality, computation, and bounded-future streaming"
+type: software
+authors:
+  - name: "VocalStream contributors"
+repository-code: "https://github.com/junxilucian-rgb/vocalstream"
+url: "https://github.com/junxilucian-rgb/vocalstream"
+license: MIT
+version: "0.1.0"
+date-released: "2026-10-19"
+keywords:
+  - music source separation
+  - vocal separation
+  - BS-RoFormer
+  - inference optimization
+  - streaming audio

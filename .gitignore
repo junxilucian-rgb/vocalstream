@@ -1,0 +1,50 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv*/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Local data, pretrained assets, generated outputs and download caches
+/data/
+/model_cache/
+/results/
+/visualizations/
+/.tmp/
+/.plotting_deps/
+/.plotting_cache/
+*.part
+*.tmp
+
+# Never redistribute audio, datasets, or checkpoint weights here
+*.wav
+*.flac
+*.mp3
+*.mp4
+*.ogg
+*.aiff
+*.aac
+*.stem.mp4
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.whl
+
+# Credentials and machine-local metadata
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/

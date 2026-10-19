@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "studies": {
+    "head_optimization": {
+      "path": "head_optimization.json",
+      "sha256": "79d1edec80c28517a77060ebd60ee0743fb6619679b15b5298488f7957d91520",
+      "job_count": 16,
+      "original_study_id": "head_optimization_20261019"
+    },
+    "streaming_study": {
+      "path": "streaming_study.json",
+      "sha256": "c5a0678ff285220801bd09011253d807901c1ab505822257068b9e410dc6dda8",
+      "job_count": 13,
+      "original_study_id": "streaming_study_20261019"
+    },
+    "refinement": {
+      "path": "refinement.json",
+      "sha256": "02e686cf30a6f29ddec06d4c622a5f457e21d6b15b801292a56ead84ace758a9",
+      "job_count": 18,
+      "original_study_id": "refinement_20261012"
+    }
+  }
+}

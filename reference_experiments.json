@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "root": "data/musdb18-hq",
+  "seed": 2026,
+  "threads": 1,
+  "device": "cuda",
+  "pilot_tracks": ["ANiMAL - Rockshow", "Actions - One Minute Smile", "Alexander Ross - Goodbye Bolero"],
+  "pilot_start": 60,
+  "pilot_duration": 30,
+  "purpose": "Pretrained Open-Unmix baseline and professor-recommended BS-RoFormer architecture; no custom model training",
+  "experiments": [
+    {"name": "openunmix_hq", "system": "openunmix", "model": "umxhq", "niter": 1},
+    {"name": "bs_hq_fp32_o2", "system": "bsroformer", "overlap": 2, "precision": "fp32"},
+    {"name": "bs_hq_fp32_o4", "system": "bsroformer", "overlap": 4, "precision": "fp32"},
+    {"name": "bs_hq_amp_o2", "system": "bsroformer", "overlap": 2, "precision": "amp"},
+    {"name": "bs_hq_2s_fp32_o2", "system": "bsroformer", "overlap": 2, "precision": "fp32", "chunk_seconds": 2}
+  ],
+  "stages": {
+    "pilot": ["openunmix_hq", "bs_hq_fp32_o2"],
+    "ablation": ["bs_hq_fp32_o4", "bs_hq_amp_o2", "bs_hq_2s_fp32_o2"],
+    "validation": ["openunmix_hq", "bs_hq_fp32_o2", "bs_hq_fp32_o4", "bs_hq_amp_o2", "bs_hq_2s_fp32_o2"]
+  },
+  "interpretation": "Pilot/ablation compare three 60-90 second train-folder validation segments; pretrained BS exact training split is undocumented. Full test after frozen inference settings is needed for final results. Shorter offline chunks retain future dependence."
+}

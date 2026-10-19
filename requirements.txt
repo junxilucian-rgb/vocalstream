@@ -1,0 +1,3 @@
+# Install the desired CPU/CUDA torch + torchaudio 2.11.0 build first.
+# See README.md for the recorded CUDA 12.8 environment.
+-e .
