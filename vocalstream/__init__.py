@@ -1,3 +1,3 @@
-"""Learning project: offline quality baseline and causal vocal separation."""
+"""Pretrained vocal separation, inference optimization and streaming evaluation."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

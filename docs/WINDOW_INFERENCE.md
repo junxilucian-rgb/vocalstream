@@ -5,7 +5,7 @@
 ## Status
 
 Implemented and evaluated on 2026-10-22 in a completed **25-job matched GPU
-development study**. No automated software test suite was run. The earlier
+development study**. Subsequent release regression checks are recorded in [release verification](RELEASE_READINESS.md). The earlier
 47 public job reports remain unchanged; 25 additional sanitized reports are
 available in [window_comparison.json](../reports/window_comparison.json).
 
@@ -188,7 +188,7 @@ about both quality and cost.
 旧方案的第二次推理会用最后1秒真实输入加1秒补零，再参与加权平均。
 移除它也会改变最终预测，因此必须同时比较质量，不能宣称波形等价。
 
-**已完成25项 GPU 开发片段实验；未运行自动化软件测试套件。**
+**已完成25项 GPU 开发片段实验；后续工程回归检查见[发布记录](RELEASE_READINESS.md)。**
 使用相同时间表重新运行旧方案后，每块计算中位数约从183毫秒降到91毫秒，
 总计算时间约减半。四组设置的逐曲 SI-SDR 差值中位数均为正，但有两个
 歌曲/设置组合略微下降。这里没有证明所有音频都改善，也没有主观听音结论。

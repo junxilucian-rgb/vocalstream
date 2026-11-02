@@ -4,11 +4,13 @@
 
 [中文说明](README.zh-CN.md) · [Measured results](docs/RESULTS.md) · [Reproduce the experiments](docs/REPRODUCING.md) · [Methodology](docs/METHODOLOGY.md)
 
+[CV summary](docs/CV.md) · [Interview learning guide (中文)](docs/INTERVIEW_GUIDE.zh-CN.md) · [Release checks](docs/RELEASE_READINESS.md)
+
 VocalStream investigates a practical question: **what happens to vocal separation quality and processing cost when a strong pretrained model is adapted to a narrower output task and a stricter output schedule?**
 
 The project uses Open-Unmix as a baseline and a pinned community BS-RoFormer checkpoint as its main reference. It includes vocal-head selection, mixed-precision inference, controlled vocal-bleed experiments, explicit audio metrics, and a file-stream simulator that limits access to future input.
 
-The current result is a measured engineering study. The simulated streaming implementation exceeds its 20/80 ms compute budgets; live low-latency deployment is a remaining research goal.
+The current result is a measured engineering study. The simulated streaming implementation exceeds its 20/80 ms compute budgets; live low-latency deployment is a remaining research goal. For a quick review, read the two measured optimizations below, then inspect the [evidence and limitations](docs/RESULTS.md). The additional educational training utilities are outside the main measured project.
 
 ## Main results
 
@@ -38,7 +40,7 @@ See [the full result tables and limitations](docs/RESULTS.md). This result descr
 
 ### New experimental window policy
 
-An opt-in `single` mode removes nested offline overlap-add and invokes the network once per stream context. The original `ola` mode remains the default. A completed **25-job matched GPU study** on three short development clips reduced block-compute medians from approximately **183 ms to 91 ms**. All four schedule-level paired SI-SDR medians improved, with small regressions in two song/schedule pairs. **All schedules still exceeded their 20/80 ms compute budgets.** No automated software test suite was run. See [measurements, scope and reproduction](docs/WINDOW_INFERENCE.md).
+An opt-in `single` mode removes nested offline overlap-add and invokes the network once per stream context. The original `ola` mode remains the default. A completed **25-job matched GPU study** on three short development clips reduced block-compute medians from approximately **183 ms to 91 ms**. All four schedule-level paired SI-SDR medians improved, with small regressions in two song/schedule pairs. **All schedules still exceeded their 20/80 ms compute budgets.** Automated regression checks were added for the November release; see [release verification](docs/RELEASE_READINESS.md). See [measurements, scope and reproduction](docs/WINDOW_INFERENCE.md).
 
 ## Quick start
 
@@ -122,7 +124,7 @@ The STFT–GRU and Mel-Band RoFormer modules are additional research utilities. 
 - The checkpoint comes from ZFTurbo's community release, not the original paper's checkpoint. Its complete training-song list is undisclosed, so development scores do not establish independent generalization.
 - Quality uses a whole-segment, joint-stereo **SI-SDR** implementation. These values are not interchangeable with paper BSSEval/SDR leaderboards.
 - Whole-song validation, frozen full-test benchmarking, physical microphone recordings, acoustic-feedback loops, and audio-device end-to-end latency remain future work.
-- Streaming queue times are virtual scheduling calculations based on measured compute. They are not observed hardware latency. The adapter recomputes offline overlap-add windows and has no neural-state cache.
+- Streaming queue times are virtual scheduling calculations based on measured compute. They are not observed hardware latency. Both window policies recompute the network and have no neural-state cache; `single` removes only the inner overlap-add.
 - Reports preserve their corresponding experiment hashes. The earlier 14-song baseline/head studies were not fully rerun after publication cleanup; the additional 25-job window comparison was run from this repository on 2026-10-22. New runs generate their own evidence.
 - Music recordings, stems, checkpoints, local environment files, and internal correspondence are excluded from the repository. Public reports contain statistics and hashes.
 

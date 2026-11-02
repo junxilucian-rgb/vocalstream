@@ -1,0 +1,21 @@
+name: Public evidence
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify published report integrity and paths
+        run: python -S scripts/verify_public_evidence.py
+      - name: Test the verifier using temporary fixtures
+        run: python -S -m unittest discover -s tests -p 'test_public_evidence.py' -v

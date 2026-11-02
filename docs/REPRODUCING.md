@@ -83,7 +83,7 @@ python run_streaming_study.py --root path/to/musdb18-hq --window-inference compa
 python build_streaming_study_report.py --run results/window_compare_01
 ```
 
-This opt-in protocol declares 25 jobs and reruns both window policies with the same schedules and inputs. `single` makes one model call per window; `ola` retains nested overlap-add. The recorded study completed on 2026-10-22; no automated software test suite was run. See [the measurements and interpretation guide](WINDOW_INFERENCE.md) before making performance claims. Source identities changed, so preserve earlier results and choose a new output folder.
+This opt-in protocol declares 25 jobs and reruns both window policies with the same schedules and inputs. `single` makes one model call per window; `ola` retains nested overlap-add. The recorded study completed on 2026-10-22; subsequent software regression checks are recorded in [release verification](RELEASE_READINESS.md). See [the measurements and interpretation guide](WINDOW_INFERENCE.md) before making performance claims. Source identities changed, so preserve earlier results and choose a new output folder.
 
 ## 5. Baselines, bleed and preservation
 
@@ -120,6 +120,6 @@ Install `[metrics]` for final BSSEval scoring. Code, runtime, dataset root and c
 - Repeat the same command to resume a compatible interrupted run. Failed jobs get a new attempt directory; preserved completed jobs are checked before reuse.
 - Local outputs include model metadata, input/reference fingerprints, commands, console logs and FLOAT audio. Treat raw reports as machine-local records because they contain paths.
 - Public sanitized evidence is under [reports/](../reports/README.md). Its index records original and public-export hashes. The export script takes an explicit historical results root; it does not copy audio or checkpoints.
-- This publishing pass did not run the test suite or repeat the full ML experiments. Existing engineering checks are retained under `tests/`; the recorded experiment claims are supported by their exported evidence.
+- The November release runs engineering regression checks and evidence verification; see [the recorded scope](RELEASE_READINESS.md). It does not repeat the full GPU studies; measured claims remain supported by their exported evidence.
 
 See [METHODOLOGY.md](METHODOLOGY.md) for exact metric definitions and [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for source and asset provenance.
