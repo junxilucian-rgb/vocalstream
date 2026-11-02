@@ -33,17 +33,28 @@ def encode(value) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode("utf-8")
 
 
-def export(source_project: Path, destination: Path) -> None:
+def export(source_project: Path, destination: Path, *, studies=None,
+           include_figures=True, merge_index=False) -> None:
     source_project = source_project.resolve()
     destination = destination.resolve()
-    if source_project == destination:
+    if source_project == destination and include_figures:
         raise ValueError("Publication destination must differ from the original project")
+    studies = STUDIES if studies is None else studies
     results = source_project / "results"
     output = destination / "reports"
     output.mkdir(parents=True, exist_ok=True)
-    publication_index = {"schema_version": 1, "studies": {}}
+    index_path = output / "index.json"
+    publication_index = read_json(index_path) if merge_index and index_path.exists() else {"schema_version": 1, "studies": {}}
+    if merge_index:
+        for item in publication_index["studies"].values():
+            existing = (output / item["path"]).resolve()
+            if not existing.is_relative_to(output) or digest(existing) != item["sha256"]:
+                raise ValueError("Existing publication index does not match its evidence")
+    exported_jobs = 0
 
-    for public_name, (folder, analysis_name, expected_jobs) in STUDIES.items():
+    for public_name, (folder, analysis_name, expected_jobs) in studies.items():
+        if not re.fullmatch(r"[a-z][a-z0-9_]*", public_name) or Path(folder).name != folder:
+            raise ValueError("Study name/folder must be a simple publication identifier")
         original = results / folder
         run_path = original / "run.json"
         run = read_json(run_path)
@@ -82,6 +93,16 @@ def export(source_project: Path, destination: Path) -> None:
 
         analysis_path = original / analysis_name
         protocol_path = original / "protocol.json"
+        if config.get("window_inference_study") == "compare":
+            analysis = read_json(analysis_path)
+            generation = analysis["analysis_generation"]
+            if (analysis.get("status") != "complete"
+                    or read_json(protocol_path) != run["context"]
+                    or analysis["configuration"] != config
+                    or generation["run_record_sha256"] != digest(run_path)
+                    or generation["protocol_sha256"] != digest(protocol_path)
+                    or analysis["inference_source_hashes"] != run["context"]["source_hashes"]):
+                raise ValueError("Matched-study analysis does not identify the completed inference run")
         public_jobs = {}
         job_output = output / public_name / "jobs"
         job_output.mkdir(parents=True, exist_ok=True)
@@ -134,23 +155,39 @@ def export(source_project: Path, destination: Path) -> None:
             "job_count": len(public_jobs),
             "original_study_id": folder,
         }
+        exported_jobs += len(public_jobs)
 
-    assets = destination / "assets"
-    assets.mkdir(parents=True, exist_ok=True)
-    for folder, stem in (("head_optimization_20261019", "head_optimization_overview"), ("refinement_20261012", "refinement_overview")):
-        for extension in ("png", "svg"):
-            source = results / folder / "figures" / f"{stem}.{extension}"
-            target = assets / source.name
-            shutil.copyfile(source, target)
-            if extension == "svg" and ABSOLUTE_WINDOWS.search(target.read_text(encoding="utf-8")):
-                raise ValueError("Absolute path found in exported SVG")
-    (output / "index.json").write_bytes(encode(publication_index))
-    print(f"Exported {sum(x['job_count'] for x in publication_index['studies'].values())} existing job reports; no model execution.")
+    if include_figures:
+        assets = destination / "assets"
+        assets.mkdir(parents=True, exist_ok=True)
+        for folder, stem in (("head_optimization_20261019", "head_optimization_overview"), ("refinement_20261012", "refinement_overview")):
+            for extension in ("png", "svg"):
+                source = results / folder / "figures" / f"{stem}.{extension}"
+                target = assets / source.name
+                shutil.copyfile(source, target)
+                if extension == "svg" and ABSOLUTE_WINDOWS.search(target.read_text(encoding="utf-8")):
+                    raise ValueError("Absolute path found in exported SVG")
+    index_path.write_bytes(encode(publication_index))
+    print(f"Exported {exported_jobs} existing job reports; no model execution.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-project", required=True, type=Path)
+    source_group = parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument("--source-project", type=Path, help="Export the three historical studies")
+    source_group.add_argument("--run", type=Path, help="Append one completed local streaming study under results/")
+    parser.add_argument("--study-name", default="window_comparison", help="Public name for --run")
     parser.add_argument("--destination", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
-    export(args.source_project, args.destination)
+    if args.run is not None:
+        run = args.run.expanduser().resolve()
+        if run.parent.name != "results":
+            parser.error("--run must be a direct study folder under a project's results/ directory")
+        config = read_json(run / "protocol.json")["configuration"]
+        if config.get("window_inference_study") != "compare" or config.get("expected_jobs") != 25:
+            parser.error("--run currently supports the declared 25-job matched window comparison")
+        export(run.parent.parent, args.destination,
+               studies={args.study_name: (run.name, "streaming_study_analysis.json", 25)},
+               include_figures=False, merge_index=True)
+    else:
+        export(args.source_project, args.destination, merge_index=True)

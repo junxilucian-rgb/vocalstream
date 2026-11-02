@@ -18,6 +18,12 @@
       "sha256": "02e686cf30a6f29ddec06d4c622a5f457e21d6b15b801292a56ead84ace758a9",
       "job_count": 18,
       "original_study_id": "refinement_20261012"
+    },
+    "window_comparison": {
+      "path": "window_comparison.json",
+      "sha256": "aedde74b24c54e6d5a6435a4e729bce676d87360eeb0e8493e296b8f079fa907",
+      "job_count": 25,
+      "original_study_id": "window_compare_20261022_01"
     }
   }
 }

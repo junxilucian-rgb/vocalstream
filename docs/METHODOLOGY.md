@@ -58,8 +58,10 @@ The adapter accepts only the next small input packet. It pads missing past at st
 
 The stream study uses the identical unpadded target interval shared by every setting, then separately reports whole-clip scores and full-real-context timing. A virtual serial worker uses `finish = max(input_available, previous_finish) + measured_compute`. Queue and deadline values are calculations on this virtual clock, not actual soundcard observations.
 
+The experimental `single` window policy removes inner offline overlap-add and uses one model call for each exact context; `ola` remains the default and uses two calls for an exact two-second context with overlap=2. Both recompute the network and retain its own STFT/ISTFT. They have the same outer input dependencies but need not have the same predictions. The matched workflow reruns both policies, records call counts, and reports paired quality differences on common target samples. A 25-job development study completed on 2026-10-22; no automated software test suite was run. See [WINDOW_INFERENCE.md](WINDOW_INFERENCE.md).
+
 ## Publication copy
 
 The sanitized JSON export preserves numerical values, original experiment/report fingerprints and model provenance. Local filesystem paths are replaced with logical identifiers. Audio, model files, raw console logs and correspondence remain outside the public repository.
 
-Publishing adds portable dataset-root and installation handling. The full model studies have not been rerun after those changes. Original research source hashes identify the recorded runs; new executions create their own run manifests.
+Publishing adds portable dataset-root and installation handling. The earlier 14-song model/head studies were not fully rerun after those changes. The additional 25-job window study ran from this repository on 2026-10-22. Corresponding research source hashes identify each recorded run; new executions create their own run manifests.

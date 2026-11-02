@@ -30,11 +30,15 @@ Measured on an **NVIDIA RTX 4060 Laptop GPU**, Python 3.12, PyTorch 2.11.0+cu128
 
 RTF = processing seconds / audio seconds. It measures throughput, not algorithmic or audio-device latency. VRAM values use decimal GB and PyTorch's peak allocated-memory counter.
 
-### Streaming result
+### Earlier streaming result
 
 The rolling-window adapter uses a fixed two-second context and explicitly separates cached past, emitted samples, and lookahead. On three four-second development clips, its median per-emission compute time was approximately **208 ms**. All measured steady-state emissions exceeded the declared 20/80 ms compute periods. More lookahead improved quality on these clips, while repeated offline-window computation caused substantial backlog.
 
 See [the full result tables and limitations](docs/RESULTS.md). This result describes the implemented recomputation schedule, not a lower bound for all possible BS-RoFormer streaming implementations.
+
+### New experimental window policy
+
+An opt-in `single` mode removes nested offline overlap-add and invokes the network once per stream context. The original `ola` mode remains the default. A completed **25-job matched GPU study** on three short development clips reduced block-compute medians from approximately **183 ms to 91 ms**. All four schedule-level paired SI-SDR medians improved, with small regressions in two song/schedule pairs. **All schedules still exceeded their 20/80 ms compute budgets.** No automated software test suite was run. See [measurements, scope and reproduction](docs/WINDOW_INFERENCE.md).
 
 ## Quick start
 
@@ -119,7 +123,7 @@ The STFT–GRU and Mel-Band RoFormer modules are additional research utilities. 
 - Quality uses a whole-segment, joint-stereo **SI-SDR** implementation. These values are not interchangeable with paper BSSEval/SDR leaderboards.
 - Whole-song validation, frozen full-test benchmarking, physical microphone recordings, acoustic-feedback loops, and audio-device end-to-end latency remain future work.
 - Streaming queue times are virtual scheduling calculations based on measured compute. They are not observed hardware latency. The adapter recomputes offline overlap-add windows and has no neural-state cache.
-- Published reports preserve the original experiment hashes. The publication copy adds portable path/setup handling; the full ML studies have not been rerun after those publishing changes. New runs generate their own evidence.
+- Reports preserve their corresponding experiment hashes. The earlier 14-song baseline/head studies were not fully rerun after publication cleanup; the additional 25-job window comparison was run from this repository on 2026-10-22. New runs generate their own evidence.
 - Music recordings, stems, checkpoints, local environment files, and internal correspondence are excluded from the repository. Public reports contain statistics and hashes.
 
 ## References and license

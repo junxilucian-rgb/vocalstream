@@ -1,0 +1,8 @@
+{
+  "analysis_sha256": "6fcda660fa509ee923205340fa1789abc4f212228059ff3f5f7aab58f969f19b",
+  "plot_source_sha256": "d62d52ca87be0f0048979c870f6bde7647e82f1c9cae040bb4e7ccda6c13f426",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "timing_scope": "pooled steady blocks from one run per song/setting; upper whiskers are p95, not confidence intervals",
+  "quality_scope": "three independent songs; short shared target interval; unknown pretraining overlap"
+}

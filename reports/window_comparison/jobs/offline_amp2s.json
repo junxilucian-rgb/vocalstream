@@ -1,0 +1,751 @@
+{
+  "status": "complete",
+  "created_utc": "20261022T192730Z_42d50c0c",
+  "configuration": {
+    "root": "MUSDB18-HQ",
+    "input": null,
+    "system": "bsroformer",
+    "chunk_seconds": 2.0,
+    "bs_heads": "vocals",
+    "model": "umxhq",
+    "checkpoint": null,
+    "overlap": 2,
+    "precision": "amp",
+    "tta": false,
+    "niter": 0,
+    "subset": "train",
+    "track": [
+      "Actions - One Minute Smile",
+      "Alexander Ross - Goodbye Bolero",
+      "ANiMAL - Rockshow"
+    ],
+    "limit": null,
+    "start": 60.0,
+    "duration": 4.0,
+    "condition": "mixture",
+    "snr_db": 10,
+    "bleed_db": -20,
+    "rt60": 0.25,
+    "seed": 2026,
+    "device": "cuda",
+    "threads": 1,
+    "bsseval": false,
+    "save_audio": false,
+    "save_audio_limit": null,
+    "save_estimates": true,
+    "out": "results/window_compare_20261022_01/offline_amp2s/attempt_01/output"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpu_count": 20,
+    "torch_threads": 1,
+    "cuda_available": true,
+    "versions": {
+      "torch": "2.11.0+cu128",
+      "torchaudio": "2.11.0+cu128",
+      "openunmix": "1.3.0",
+      "soundfile": "0.14.0",
+      "numpy": "2.5.3",
+      "museval": "0.4.1",
+      "BS-RoFormer": "0.3.9",
+      "librosa": "1.0.0",
+      "einops": "0.8.2"
+    },
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "tracks": [
+    {
+      "track": "Actions - One Minute Smile",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 176400,
+        "duration_seconds": 4.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.8925314948297656e-05,
+        "processed_input_float32_sha256": "ef4110b1f8a34a7199180131a54971a149cf4b0fac7a30b0f2d8ec0a0fa59ff5",
+        "reference_float32_sha256": "d51a337e0d415a06a55edacc225440abd59ad0636fcd93343a30d31096d4fd17"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 10.838876298557752,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -5.104635201120189,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 15.94351149967794,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 11.180769926310985,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.2760333166566705,
+        "reference_projection_gain": 0.9281050504769112,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 176400,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.54278580006212,
+        "inference_rtf": 0.13569645001553,
+        "scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+        "block_rtr": null,
+        "model_runtime": {
+          "name": "BS-RoFormer ZFTurbo MUSDB18-HQ pretrained",
+          "architecture": "BSRoformer",
+          "parameters": 57790284,
+          "sample_rate": 44100,
+          "channels": 2,
+          "target": "vocals",
+          "device": "cuda",
+          "precision": "amp",
+          "chunk_samples": 88200,
+          "chunk_seconds": 2.0,
+          "overlap": 2,
+          "step_samples": 44100,
+          "fade_samples": 8820,
+          "reflect_border_samples": 44100,
+          "chunk_batch_size": 1,
+          "tta": false,
+          "tta_augmentation": [
+            "original"
+          ],
+          "checkpoint_repository": "ZFTurbo/Music-Source-Separation-Training",
+          "checkpoint_revision": "v1.0.12",
+          "checkpoint_sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+          "checkpoint_state_key": "raw_state_dict",
+          "config_sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+          "vendor_source": "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py",
+          "vendor_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002",
+          "architecture_package": "pinned publisher source (local namespace)",
+          "architecture_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+          "state_dict_loading": "weights_only=True; strict=True",
+          "load_seconds": 2.2100996000226587,
+          "warmup_applied": true,
+          "streaming": false,
+          "causal": false,
+          "algorithmic_latency_ms": null,
+          "latency_reason": "Offline bidirectional attention and overlap-add use future samples; context length is not a measured causal latency",
+          "timing_scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+          "processing_timing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+          "last_run": {
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "processing_seconds": 0.5545308999717236,
+            "processing_rtf": 0.1386327249929309,
+            "network_inference_seconds": 0.54278580006212,
+            "network_inference_rtf": 0.13569645001553,
+            "model_forward_passes": 6,
+            "tta_passes": 1,
+            "global_reflect_border_applied": true,
+            "cuda_peak_allocated_bytes": 397263360,
+            "cuda_peak_reserved_bytes": 494927872,
+            "output_peak": 0.24170690774917603,
+            "gain_normalization_applied": false,
+            "clipping_applied": false
+          },
+          "torch_float32_matmul_precision": "highest",
+          "cuda_matmul_allow_tf32": false,
+          "source_provenance": {
+            "architecture": "BSRoformer",
+            "checkpoint_release": "v1.0.12",
+            "publisher": "ZFTurbo/Music-Source-Separation-Training",
+            "source_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+            "training_data_statement": "Publisher says trained on MUSDB18HQ; exact training/validation list not supplied",
+            "exact_original_paper_checkpoint": false,
+            "weight_license": "not specified in the release",
+            "registry_source": "https://github.com/openmirlab/bs-roformer-infer",
+            "source_files": {
+              "bs_roformer.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/bs_roformer.py",
+                "upstream_sha256": "93408c7254c60c48e47be0657a64745065396b0b1c6da4e02c75aca57eb62bf3",
+                "local_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+              },
+              "attend.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/attend.py",
+                "upstream_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+                "local_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15"
+              },
+              "LICENSE": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/LICENSE",
+                "upstream_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207",
+                "local_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+              }
+            },
+            "assets": {
+              "model.ckpt": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt",
+                "sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+                "bytes": 527385512
+              },
+              "config.yaml": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/config_bs_roformer_384_8_2_485100.yaml",
+                "sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+                "bytes": 4566
+              }
+            }
+          },
+          "stem_order": [
+            "drums",
+            "bass",
+            "other",
+            "vocals"
+          ],
+          "vocal_stem_index": 3,
+          "network_outputs_all_four_stems": false,
+          "returned_audio_target": "vocals",
+          "inference_heads": "vocals",
+          "output_stem_order": [
+            "vocals"
+          ],
+          "full_checkpoint_parameters": 131704164,
+          "removed_parameters": 73913880,
+          "original_mask_head_parameters": [
+            24637960,
+            24637960,
+            24637960,
+            24637960
+          ],
+          "head_selection_after_strict_load": true,
+          "head_selection_scope": "inference only; pretrained vocal head and shared trunk unchanged; source checkpoint remains unmodified",
+          "trained_chunk_seconds": 11.0,
+          "input_context_reduced_without_retraining": true,
+          "warmup_seconds": 0.8463360000168905,
+          "training_split_verified": false,
+          "exact_original_paper_checkpoint": false
+        },
+        "adapter_processing_seconds": 0.5545308999717236,
+        "adapter_processing_rtf": 0.1386327249929309,
+        "adapter_processing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+        "processing_call_seconds": 0.555583699955605,
+        "processing_call_rtf": 0.13889592498890124,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.71270751953125,
+      "estimate_peak": 0.24170690774917603,
+      "audio_directory": "results/window_compare_20261022_01/offline_amp2s/attempt_01/output/track_001",
+      "audio_export_scope": "estimate_only"
+    },
+    {
+      "track": "Alexander Ross - Goodbye Bolero",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 176400,
+        "duration_seconds": 4.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 4.732431267179236e-05,
+        "processed_input_float32_sha256": "d6a6c5904eb2037aa982d6da3c3226b2dac2453631bc05314dd7941fe460a514",
+        "reference_float32_sha256": "75c20a33f4fd7647634c758d0d9142b9a530bbb8d30e3509b8a7cc3bd2ea403a"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 11.738096187026468,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -7.69694957552904,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 19.435045762555507,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 12.0148604125162,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.2507592598987918,
+        "reference_projection_gain": 0.9453586779899251,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 176400,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.5424031001748517,
+        "inference_rtf": 0.13560077504371293,
+        "scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+        "block_rtr": null,
+        "model_runtime": {
+          "name": "BS-RoFormer ZFTurbo MUSDB18-HQ pretrained",
+          "architecture": "BSRoformer",
+          "parameters": 57790284,
+          "sample_rate": 44100,
+          "channels": 2,
+          "target": "vocals",
+          "device": "cuda",
+          "precision": "amp",
+          "chunk_samples": 88200,
+          "chunk_seconds": 2.0,
+          "overlap": 2,
+          "step_samples": 44100,
+          "fade_samples": 8820,
+          "reflect_border_samples": 44100,
+          "chunk_batch_size": 1,
+          "tta": false,
+          "tta_augmentation": [
+            "original"
+          ],
+          "checkpoint_repository": "ZFTurbo/Music-Source-Separation-Training",
+          "checkpoint_revision": "v1.0.12",
+          "checkpoint_sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+          "checkpoint_state_key": "raw_state_dict",
+          "config_sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+          "vendor_source": "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py",
+          "vendor_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002",
+          "architecture_package": "pinned publisher source (local namespace)",
+          "architecture_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+          "state_dict_loading": "weights_only=True; strict=True",
+          "load_seconds": 2.2100996000226587,
+          "warmup_applied": true,
+          "streaming": false,
+          "causal": false,
+          "algorithmic_latency_ms": null,
+          "latency_reason": "Offline bidirectional attention and overlap-add use future samples; context length is not a measured causal latency",
+          "timing_scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+          "processing_timing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+          "last_run": {
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "processing_seconds": 0.5543229000177234,
+            "processing_rtf": 0.13858072500443086,
+            "network_inference_seconds": 0.5424031001748517,
+            "network_inference_rtf": 0.13560077504371293,
+            "model_forward_passes": 6,
+            "tta_passes": 1,
+            "global_reflect_border_applied": true,
+            "cuda_peak_allocated_bytes": 397263360,
+            "cuda_peak_reserved_bytes": 494927872,
+            "output_peak": 0.29602769017219543,
+            "gain_normalization_applied": false,
+            "clipping_applied": false
+          },
+          "torch_float32_matmul_precision": "highest",
+          "cuda_matmul_allow_tf32": false,
+          "source_provenance": {
+            "architecture": "BSRoformer",
+            "checkpoint_release": "v1.0.12",
+            "publisher": "ZFTurbo/Music-Source-Separation-Training",
+            "source_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+            "training_data_statement": "Publisher says trained on MUSDB18HQ; exact training/validation list not supplied",
+            "exact_original_paper_checkpoint": false,
+            "weight_license": "not specified in the release",
+            "registry_source": "https://github.com/openmirlab/bs-roformer-infer",
+            "source_files": {
+              "bs_roformer.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/bs_roformer.py",
+                "upstream_sha256": "93408c7254c60c48e47be0657a64745065396b0b1c6da4e02c75aca57eb62bf3",
+                "local_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+              },
+              "attend.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/attend.py",
+                "upstream_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+                "local_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15"
+              },
+              "LICENSE": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/LICENSE",
+                "upstream_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207",
+                "local_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+              }
+            },
+            "assets": {
+              "model.ckpt": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt",
+                "sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+                "bytes": 527385512
+              },
+              "config.yaml": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/config_bs_roformer_384_8_2_485100.yaml",
+                "sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+                "bytes": 4566
+              }
+            }
+          },
+          "stem_order": [
+            "drums",
+            "bass",
+            "other",
+            "vocals"
+          ],
+          "vocal_stem_index": 3,
+          "network_outputs_all_four_stems": false,
+          "returned_audio_target": "vocals",
+          "inference_heads": "vocals",
+          "output_stem_order": [
+            "vocals"
+          ],
+          "full_checkpoint_parameters": 131704164,
+          "removed_parameters": 73913880,
+          "original_mask_head_parameters": [
+            24637960,
+            24637960,
+            24637960,
+            24637960
+          ],
+          "head_selection_after_strict_load": true,
+          "head_selection_scope": "inference only; pretrained vocal head and shared trunk unchanged; source checkpoint remains unmodified",
+          "trained_chunk_seconds": 11.0,
+          "input_context_reduced_without_retraining": true,
+          "warmup_seconds": 0.8463360000168905,
+          "training_split_verified": false,
+          "exact_original_paper_checkpoint": false
+        },
+        "adapter_processing_seconds": 0.5543229000177234,
+        "adapter_processing_rtf": 0.13858072500443086,
+        "adapter_processing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+        "processing_call_seconds": 0.5553752999985591,
+        "processing_call_rtf": 0.13884382499963976,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.448516845703125,
+      "estimate_peak": 0.29602769017219543,
+      "audio_directory": "results/window_compare_20261022_01/offline_amp2s/attempt_01/output/track_002",
+      "audio_export_scope": "estimate_only"
+    },
+    {
+      "track": "ANiMAL - Rockshow",
+      "segment": {
+        "start_sample": 2646000,
+        "samples": 176400,
+        "duration_seconds": 4.0,
+        "mixture_sum_max_abs_difference": 9.1552734375e-05,
+        "mixture_sum_rms_difference": 5.3067011913422084e-05,
+        "processed_input_float32_sha256": "6ab7e541365dd0ca66257766903b777ba3ae477bc5024d62280089d43ee3199a",
+        "reference_float32_sha256": "a8afd588f04dc858ebf829b065de606d26fba96e5fe39c9c960781b1ea341a56"
+      },
+      "condition": {
+        "mode": "mixture",
+        "task": "music_vocal_source_separation",
+        "comparison_group": "music_vocal_source_separation",
+        "input": "official_mixture.wav",
+        "reference": "official_vocals.wav",
+        "reference_is_stem_not_guaranteed_dry_close_mic": true
+      },
+      "quality": {
+        "si_sdr_db": 10.990056002271057,
+        "si_sdr_undefined_reason": null,
+        "mixture_si_sdr_db": -3.6366771255889105,
+        "mixture_si_sdr_undefined_reason": null,
+        "si_sdri_db": 14.626733127859968,
+        "si_sdri_undefined_reason": null,
+        "global_residual_sdr_db": 11.322363222961688,
+        "global_residual_sdr_undefined_reason": null,
+        "normalized_waveform_rmse": 0.2715700291175597,
+        "reference_projection_gain": 0.9286246118781966,
+        "preservation_diagnostic_scope": "unaligned raw waveform error; no gain fitting; interpret especially on original-vocal identity inputs",
+        "frames": 176400,
+        "channels": 2,
+        "protocol": {
+          "segment": "entire_supplied_segment",
+          "si_sdr_centering": "subtract_whole_segment_mean_per_channel",
+          "si_sdr_channel_reduction": "flatten_channels_then_fit_one_shared_gain",
+          "alignment": "none; caller must preserve time alignment",
+          "global_residual_sdr": "10log10(raw_reference_energy/raw_error_energy)",
+          "silence_rms_threshold": 1e-08,
+          "numerical_energy_floor_ratio": 1e-12,
+          "score_cap_db": 120.0,
+          "museval_bsseval_sdr": false
+        }
+      },
+      "timing": {
+        "inference_seconds": 0.5369820999912918,
+        "inference_rtf": 0.13424552499782294,
+        "scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+        "block_rtr": null,
+        "model_runtime": {
+          "name": "BS-RoFormer ZFTurbo MUSDB18-HQ pretrained",
+          "architecture": "BSRoformer",
+          "parameters": 57790284,
+          "sample_rate": 44100,
+          "channels": 2,
+          "target": "vocals",
+          "device": "cuda",
+          "precision": "amp",
+          "chunk_samples": 88200,
+          "chunk_seconds": 2.0,
+          "overlap": 2,
+          "step_samples": 44100,
+          "fade_samples": 8820,
+          "reflect_border_samples": 44100,
+          "chunk_batch_size": 1,
+          "tta": false,
+          "tta_augmentation": [
+            "original"
+          ],
+          "checkpoint_repository": "ZFTurbo/Music-Source-Separation-Training",
+          "checkpoint_revision": "v1.0.12",
+          "checkpoint_sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+          "checkpoint_state_key": "raw_state_dict",
+          "config_sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+          "vendor_source": "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py",
+          "vendor_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002",
+          "architecture_package": "pinned publisher source (local namespace)",
+          "architecture_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+          "state_dict_loading": "weights_only=True; strict=True",
+          "load_seconds": 2.2100996000226587,
+          "warmup_applied": true,
+          "streaming": false,
+          "causal": false,
+          "algorithmic_latency_ms": null,
+          "latency_reason": "Offline bidirectional attention and overlap-add use future samples; context length is not a measured causal latency",
+          "timing_scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+          "processing_timing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+          "last_run": {
+            "samples": 176400,
+            "duration_seconds": 4.0,
+            "processing_seconds": 0.548751899972558,
+            "processing_rtf": 0.1371879749931395,
+            "network_inference_seconds": 0.5369820999912918,
+            "network_inference_rtf": 0.13424552499782294,
+            "model_forward_passes": 6,
+            "tta_passes": 1,
+            "global_reflect_border_applied": true,
+            "cuda_peak_allocated_bytes": 397263360,
+            "cuda_peak_reserved_bytes": 494927872,
+            "output_peak": 0.42037537693977356,
+            "gain_normalization_applied": false,
+            "clipping_applied": false
+          },
+          "torch_float32_matmul_precision": "highest",
+          "cuda_matmul_allow_tf32": false,
+          "source_provenance": {
+            "architecture": "BSRoformer",
+            "checkpoint_release": "v1.0.12",
+            "publisher": "ZFTurbo/Music-Source-Separation-Training",
+            "source_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+            "training_data_statement": "Publisher says trained on MUSDB18HQ; exact training/validation list not supplied",
+            "exact_original_paper_checkpoint": false,
+            "weight_license": "not specified in the release",
+            "registry_source": "https://github.com/openmirlab/bs-roformer-infer",
+            "source_files": {
+              "bs_roformer.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/bs_roformer.py",
+                "upstream_sha256": "93408c7254c60c48e47be0657a64745065396b0b1c6da4e02c75aca57eb62bf3",
+                "local_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+              },
+              "attend.py": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/attend.py",
+                "upstream_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+                "local_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15"
+              },
+              "LICENSE": {
+                "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/LICENSE",
+                "upstream_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207",
+                "local_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+              }
+            },
+            "assets": {
+              "model.ckpt": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt",
+                "sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+                "bytes": 527385512
+              },
+              "config.yaml": {
+                "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/config_bs_roformer_384_8_2_485100.yaml",
+                "sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+                "bytes": 4566
+              }
+            }
+          },
+          "stem_order": [
+            "drums",
+            "bass",
+            "other",
+            "vocals"
+          ],
+          "vocal_stem_index": 3,
+          "network_outputs_all_four_stems": false,
+          "returned_audio_target": "vocals",
+          "inference_heads": "vocals",
+          "output_stem_order": [
+            "vocals"
+          ],
+          "full_checkpoint_parameters": 131704164,
+          "removed_parameters": 73913880,
+          "original_mask_head_parameters": [
+            24637960,
+            24637960,
+            24637960,
+            24637960
+          ],
+          "head_selection_after_strict_load": true,
+          "head_selection_scope": "inference only; pretrained vocal head and shared trunk unchanged; source checkpoint remains unmodified",
+          "trained_chunk_seconds": 11.0,
+          "input_context_reduced_without_retraining": true,
+          "warmup_seconds": 0.8463360000168905,
+          "training_split_verified": false,
+          "exact_original_paper_checkpoint": false
+        },
+        "adapter_processing_seconds": 0.548751899972558,
+        "adapter_processing_rtf": 0.1371879749931395,
+        "adapter_processing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+        "processing_call_seconds": 0.5499006999889389,
+        "processing_call_rtf": 0.13747517499723472,
+        "processing_call_scope": "one separation call from in-memory input to CPU waveform; includes array preparation, device transfers and output assembly; excludes model loading, file I/O, quality metrics and audio-device buffers",
+        "processing_call_includes_warmup": false,
+        "model_warmup_applied": true
+      },
+      "input_peak": 0.900299072265625,
+      "estimate_peak": 0.42037537693977356,
+      "audio_directory": "results/window_compare_20261022_01/offline_amp2s/attempt_01/output/track_003",
+      "audio_export_scope": "estimate_only"
+    }
+  ],
+  "end_to_end_audio_latency_measured": false,
+  "stage": "complete",
+  "model": {
+    "name": "BS-RoFormer ZFTurbo MUSDB18-HQ pretrained",
+    "architecture": "BSRoformer",
+    "parameters": 57790284,
+    "sample_rate": 44100,
+    "channels": 2,
+    "target": "vocals",
+    "device": "cuda",
+    "precision": "amp",
+    "chunk_samples": 88200,
+    "chunk_seconds": 2.0,
+    "overlap": 2,
+    "step_samples": 44100,
+    "fade_samples": 8820,
+    "reflect_border_samples": 44100,
+    "chunk_batch_size": 1,
+    "tta": false,
+    "tta_augmentation": [
+      "original"
+    ],
+    "checkpoint_repository": "ZFTurbo/Music-Source-Separation-Training",
+    "checkpoint_revision": "v1.0.12",
+    "checkpoint_sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+    "checkpoint_state_key": "raw_state_dict",
+    "config_sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+    "vendor_source": "vocalstream/vendor/zfturbo_bsroformer/bs_roformer.py",
+    "vendor_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002",
+    "architecture_package": "pinned publisher source (local namespace)",
+    "architecture_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+    "state_dict_loading": "weights_only=True; strict=True",
+    "load_seconds": 2.2100996000226587,
+    "warmup_applied": true,
+    "streaming": false,
+    "causal": false,
+    "algorithmic_latency_ms": null,
+    "latency_reason": "Offline bidirectional attention and overlap-add use future samples; context length is not a measured causal latency",
+    "timing_scope": "sum of synchronized model forwards across all chunks and TTA, including in-model STFT + neural mask + ISTFT; excludes loading, file I/O, padding, transfers and overlap-add",
+    "processing_timing_scope": "all chunks and TTA, CPU preparation, padding, device transfers, neural inference and overlap-add; excludes checkpoint loading and file I/O",
+    "last_run": null,
+    "torch_float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "source_provenance": {
+      "architecture": "BSRoformer",
+      "checkpoint_release": "v1.0.12",
+      "publisher": "ZFTurbo/Music-Source-Separation-Training",
+      "source_commit": "aef04b2e52fb3beaf25e333199f5a7236e628e7b",
+      "training_data_statement": "Publisher says trained on MUSDB18HQ; exact training/validation list not supplied",
+      "exact_original_paper_checkpoint": false,
+      "weight_license": "not specified in the release",
+      "registry_source": "https://github.com/openmirlab/bs-roformer-infer",
+      "source_files": {
+        "bs_roformer.py": {
+          "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/bs_roformer.py",
+          "upstream_sha256": "93408c7254c60c48e47be0657a64745065396b0b1c6da4e02c75aca57eb62bf3",
+          "local_sha256": "7c4b9aaf2075011621a87cd78368b46db1065133f11baf7cd27839bc44733002"
+        },
+        "attend.py": {
+          "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/models/bs_roformer/attend.py",
+          "upstream_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15",
+          "local_sha256": "0459d799ade55541df2994b0becf7aec12214491360c5a06e346f6d615eaed15"
+        },
+        "LICENSE": {
+          "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/aef04b2e52fb3beaf25e333199f5a7236e628e7b/LICENSE",
+          "upstream_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207",
+          "local_sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+        }
+      },
+      "assets": {
+        "model.ckpt": {
+          "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/model_bs_roformer_ep_17_sdr_9.6568.ckpt",
+          "sha256": "3e9daecd70aaed5b5a0d1f861cc4d77eaa45afb3fc6301b1cf32c1be0f5868fb",
+          "bytes": 527385512
+        },
+        "config.yaml": {
+          "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/download/v1.0.12/config_bs_roformer_384_8_2_485100.yaml",
+          "sha256": "d8afb980318d0c08b9c2e24a7adc00d4f3150320c127a7e4de861800d1321939",
+          "bytes": 4566
+        }
+      }
+    },
+    "stem_order": [
+      "drums",
+      "bass",
+      "other",
+      "vocals"
+    ],
+    "vocal_stem_index": 3,
+    "network_outputs_all_four_stems": false,
+    "returned_audio_target": "vocals",
+    "inference_heads": "vocals",
+    "output_stem_order": [
+      "vocals"
+    ],
+    "full_checkpoint_parameters": 131704164,
+    "removed_parameters": 73913880,
+    "original_mask_head_parameters": [
+      24637960,
+      24637960,
+      24637960,
+      24637960
+    ],
+    "head_selection_after_strict_load": true,
+    "head_selection_scope": "inference only; pretrained vocal head and shared trunk unchanged; source checkpoint remains unmodified",
+    "trained_chunk_seconds": 11.0,
+    "input_context_reduced_without_retraining": true,
+    "warmup_seconds": 0.8463360000168905,
+    "training_split_verified": false,
+    "exact_original_paper_checkpoint": false
+  },
+  "dataset_metadata": {
+    "kind": "MUSDB18-HQ",
+    "formal_benchmark": true,
+    "source_verification": "user-provided folder; confirm official release provenance"
+  },
+  "dataset": "MUSDB18-HQ",
+  "benchmark_protocol": "pilot_or_demo",
+  "aggregate": {
+    "si_sdr_track_median_db": 10.990056002271057,
+    "valid_si_sdr_tracks": 3,
+    "track_count": 3,
+    "si_sdr_aggregation": "median of one whole-segment joint-stereo score per selected track",
+    "bsseval_v4_median_tracks_median_frames_vocals_sdr_db": null,
+    "valid_bsseval_v4_sdr_tracks": 0
+  }
+}

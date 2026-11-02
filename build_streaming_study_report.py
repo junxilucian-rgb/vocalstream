@@ -1,7 +1,7 @@
 """Analyze a completed short file-stream study on identical target intervals.
 
 Raw worker reports remain unchanged. Vocal references are read here only after
-all thirteen inference jobs and their report hashes have been verified.
+all declared inference jobs and their report hashes have been verified.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import numpy as np
 import soundfile as sf
 
 from run_project import PROJECT, digest, exclusive_run, read_json, write_json
-from run_streaming_study import SETTINGS, TRACKS, stream_job_name
+from run_streaming_study import SETTINGS, TRACKS, stream_job_name, study_settings
 from vocalstream.metrics import separation_metrics
 
 
@@ -44,14 +44,21 @@ def score_delta(candidate, baseline):
     return candidate-baseline
 
 
-def check_model(model, context):
+def check_model(model, context, window_inference='ola'):
     config = context['configuration']
     require(model['checkpoint_sha256'] == context['model_asset_sha256']['model.ckpt'], 'Checkpoint mismatch')
     require(model['config_sha256'] == context['model_asset_sha256']['config.yaml'], 'Model config mismatch')
     require(model['inference_heads'] == 'vocals' and model['output_stem_order'] == ['vocals'], 'Expected vocal-only inference')
     require(model['precision'] == 'amp' and model['device'] == 'cuda', 'Expected AMP/CUDA')
-    require(model['chunk_samples'] == 88200 and model['overlap'] == 2 and model['tta'] is False,
-            'Expected two-second context, overlap two, no TTA')
+    overlap = 1 if window_inference == 'single' else 2
+    require(model['chunk_samples'] == 88200 and model['overlap'] == overlap and model['tta'] is False,
+            'Unexpected context, overlap or TTA')
+    if window_inference == 'single':
+        require(model['window_inference_mode'] == 'single'
+                and model['nested_offline_overlap_add'] is False
+                and model['network_state_cached'] is False
+                and model['stft_state_cached'] is False,
+                'Single-window policy metadata mismatch')
     require(model['warmup_applied'] is True and model['sample_rate'] == config['sample_rate'], 'Warmup/rate mismatch')
 
 
@@ -80,6 +87,10 @@ def verify_emissions(report, setting, frames):
     require(stream['network_architecture_causal'] is False
             and stream['hardware_end_to_end_latency_measured'] is False,
             'This experiment does not establish architecture causality or device latency')
+    policy = setting.get('window_inference', 'ola')
+    require(report.get('window_inference_mode', 'ola') == policy
+            and stream.get('window_inference_mode', 'ola') == policy,
+            'Worker window-inference policy differs from protocol')
     cursor = 0
     steady = []
     for index, row in enumerate(emissions):
@@ -89,6 +100,11 @@ def verify_emissions(report, setting, frames):
         require(row['output_samples'] == end-begin, 'Emission output length mismatch')
         require(np.isfinite(row['processing_seconds']) and row['processing_seconds'] >= 0,
                 'Invalid processing time')
+        if 'model_forward_passes' in row:
+            # These studies supply one exactly two-second context, overlap=2,
+            # batch=1, no TTA. The original nested OLA makes two model calls.
+            require(row['model_forward_passes'] == (1 if policy == 'single' else 2),
+                    'Unexpected model call count for the declared window policy')
         if not row['eof_flush']:
             require(row['required_real_input_sample_boundary'] == end + stream['lookahead_samples'],
                     'Unexpected future input dependency')
@@ -109,12 +125,22 @@ def timing_summary(rows):
     if not rows:
         return {'emission_count': 0, 'undefined_reason': 'No unpadded non-EOF emissions'}
     times = np.array([row['processing_seconds'] for row in rows], dtype=np.float64)
+    network = np.array([row['network_forward_seconds'] for row in rows], dtype=np.float64)
     queues = np.array([row['virtual_queue_wait_seconds'] for row in rows], dtype=np.float64)
     seconds = sum(row['output_audio_seconds'] for row in rows)
+    counts = [row.get('model_forward_passes') for row in rows]
+    complete_counts = all(value is not None for value in counts)
+    peaks = [row['cuda_peak_allocated_bytes'] for row in rows if row.get('cuda_peak_allocated_bytes') is not None]
     return {'emission_count': len(rows), 'processing_seconds_p50': float(np.percentile(times, 50)),
             'processing_seconds_p95': float(np.percentile(times, 95)), 'processing_seconds_max': float(times.max()),
             'total_processing_seconds': float(times.sum()), 'total_output_audio_seconds': seconds,
+            'network_forward_seconds_p50': float(np.median(network)),
+            'network_forward_seconds_total': float(network.sum()),
+            'processing_minus_network_seconds_total': float((times-network).sum()),
+            'cuda_peak_allocated_bytes_max': max(peaks) if peaks else None,
             'processing_rtf_vs_emitted_audio': float(times.sum()/seconds),
+            'model_forward_passes_total': sum(counts) if complete_counts else None,
+            'model_forward_passes_per_emission_median': median(counts) if complete_counts else None,
             'compute_over_nominal_period_fraction': float(np.mean([row['compute_exceeds_nominal_emit_period'] for row in rows])),
             'virtual_deadline_miss_fraction': float(np.mean([row['virtual_deadline_missed'] for row in rows])),
             'virtual_queue_wait_seconds_p50': float(np.percentile(queues, 50)),
@@ -130,6 +156,7 @@ def fmt(value, digits=3):
 
 def markdown(analysis):
     config = analysis['configuration']
+    settings = config['settings']
     interval = analysis['common_quality_interval_clip_relative_samples']
     if interval:
         interval_text = f"[{interval[0]/44100:.3f}, {interval[1]/44100:.3f}) 秒，共 {(interval[1]-interval[0])/44100:.3f} 秒"
@@ -137,35 +164,42 @@ def markdown(analysis):
         interval_text = '不存在；片段没有所有配置共同的无填充稳态区间，因此不报告公共区间分数'
     lines = ['# BS-RoFormer 有限未来信息文件流实验', '',
              f"三首官方开发歌曲，每首从 {config['start_seconds']:g} 秒开始，长度 {config['requested_samples']/44100:g} 秒。",
-             '固定同一社区预训练权重、人声单分支、AMP、2 秒输入上下文和 overlap=2。完成 12 次流式短实验和 1 次含三首歌曲的离线参照任务。没有训练、test 推理或音频设备回放。', '',
+             f"固定同一社区预训练权重、人声单分支、AMP、2 秒输入上下文。完成 {config['expected_jobs']-1} 次流式短实验和 1 次含三首歌曲的离线参照任务。没有训练、test 推理或音频设备回放。", '',
              '## 1. 实验改变了什么', '',
-             '滚动保留过去输入，每次只接收下一小包数据；在指定未来信息到达后，重新调用离线分离器并截取一小段人声。内部仍使用离线重叠拼接，且每次重新计算整个窗口，没有神经状态缓存。',
+             '滚动保留过去输入，每次只接收下一小包数据；在指定未来信息到达后，重新计算窗口并截取一小段人声。ola 使用原离线重叠拼接；single 对收到的完整窗口只做一次网络调用。两者均没有神经状态缓存，输出裁剪间均没有交叉淡化。',
              '等待输入的时间与计算时间分别报告。下面的“可用等待”从输出块第一个样本的时间边界算起，为输出块长度 E 加未来上下文 L；从输出块末端边界算起则为 L。过去缓存不计作未来等待。', '',
-             '| 配置 | 输出块 E ms | 未来信息 L ms | 首边界可用等待 E+L ms | 末边界可用等待 L ms |',
-             '| --- | ---: | ---: | ---: | ---: |']
-    for setting in SETTINGS:
+             '| 配置 | 窗口推理 | 输出块 E ms | 未来信息 L ms | 首边界可用等待 E+L ms | 末边界可用等待 L ms |',
+             '| --- | --- | ---: | ---: | ---: | ---: |']
+    for setting in settings:
         e, l = setting['emit_seconds']*1000, setting['lookahead_seconds']*1000
-        lines.append(f"| {setting['name']} | {e:g} | {l:g} | {e+l:g} | {l:g} |")
+        lines.append(f"| {setting['name']} | {setting.get('window_inference', 'ola')} | {e:g} | {l:g} | {e+l:g} | {l:g} |")
     lines += ['', '这是输入依赖的名义等待，不包含计算、虚拟队列或设备延迟。L=0 表示输出块结束前的输入仍可用于同块早期样本，不等于逐样本零延迟或模型架构已经变成因果。', '',
               '## 2. 在相同目标样本上比较质量', '',
               f'所有流式配置与离线参照共同评分区间（相对片段起点）：{interval_text}。',
               '先对每首歌曲、每个配置在完全相同的目标区间计算一次 joint-stereo SI-SDR，再取三首中位数。整段分数包括起点零历史和结尾 EOF；公共区间排除所有流式配置的启动左填充与 EOF。不同配置各自的稳态分数不用于相互排名。', '',
               '| 设置 | 整段 SI-SDR 中位数 dB | 公共区间 SI-SDR 中位数 dB | 公共区间相对离线逐曲差值中位数 dB |',
               '| --- | ---: | ---: | ---: |']
-    for name in ['offline_amp2s'] + [setting['name'] for setting in SETTINGS]:
+    for name in ['offline_amp2s'] + [setting['name'] for setting in settings]:
         row = analysis['quality_summary'][name]
         lines.append(f"| {name} | {fmt(row['whole_clip_si_sdr_median_db'])} | {fmt(row['common_interval_si_sdr_median_db'])} | {fmt(row['common_interval_paired_delta_vs_offline_median_db'])} |")
     lines += ['', '离线参照也是 2 秒上下文，不是此前 11 秒高质量设置；它能使用未来音频并进行离线重叠拼接。短区间和三首中位数仅用于解释调度影响，不能当作完整音乐分离基准。', '',
               '## 3. 无填充稳态输出块的计算与虚拟排队', '',
               '| 配置 | 稳态块数 | 单块耗时 p50 / p95 ms | 计算超出块周期 | 虚拟截止时间错过 | 虚拟队列 p95 / 最大 s | 工作量 RTF |',
               '| --- | ---: | ---: | ---: | ---: | ---: | ---: |']
-    for setting in SETTINGS:
+    for setting in settings:
         name = setting['name']
         row = analysis['steady_emission_timing'][name]
         if not row['emission_count']:
             lines.append(f'| {name} | 0 | 未定义 | 未定义 | 未定义 | 未定义 | 未定义 |')
             continue
         lines.append(f"| {name} | {row['emission_count']} | {1000*row['processing_seconds_p50']:.2f} / {1000*row['processing_seconds_p95']:.2f} | {100*row['compute_over_nominal_period_fraction']:.1f}% | {100*row['virtual_deadline_miss_fraction']:.1f}% | {row['virtual_queue_wait_seconds_p95']:.3f} / {row['virtual_queue_wait_seconds_max']:.3f} | {row['processing_rtf_vs_emitted_audio']:.3f} |")
+    if analysis.get('matched_window_policy_comparisons'):
+        lines += ['', '### 同一输出时间表下的窗口推理对照', '',
+                  '| 输出设置 | ola / single 每块 forward | 稳态总计算时间比 ola÷single | 公共区间逐曲 SI-SDR 差值中位数 single−ola dB |',
+                  '| --- | ---: | ---: | ---: |']
+        for pair in analysis['matched_window_policy_comparisons']:
+            lines.append(f"| {pair['schedule']} | {fmt(pair['ola_forwards_per_emission_median'], 0)} / {fmt(pair['single_forwards_per_emission_median'], 0)} | {fmt(pair['steady_total_compute_time_ratio_ola_over_single'])} | {fmt(pair['common_interval_paired_si_sdr_delta_single_minus_ola_median_db'])} |")
+        lines += ['', '计算时间比来自本次相同输出工作量；大于 1 表示 single 较快。减少模型调用次数不代表耗时必然同比下降，也不保证分离质量一致。它不改变 E+L 的输入等待，不能当作实测设备延迟或稳定的多次重复加速结论。']
     lines += ['', '耗时分位数合并三首歌的无填充、非 EOF 输出块；这些块高度相关，不是独立重复实验。每种设置每首歌只有一次运行。加载、预热、文件读写和音频设备缓冲不计入上述计算时间。',
               '“计算超出块周期”只比较当前块计算耗时与 E；“虚拟截止时间错过”还包含之前积累的工作。虚拟单工作线程按 finish=max(输入到达时间, 上一块完成时间)+实测计算耗时调度，截止时间定义为输入到达时间+E。排队可以从启动阶段累积，即使表中只统计稳态块。',
               '该调度是用测得计算时间推演的音频时钟，没有真实等待、声卡或系统调度抖动。不能把虚拟队列数值称为实际设备延迟。', '',
@@ -176,10 +210,10 @@ def markdown(analysis):
               '- 三首短片段、一次计时仅用于找出可继续研究的问题；没有测量端到端音频设备延迟。',
               '- 输出均为 FLOAT WAV；不做增益拟合、归一化、时移搜索或峰值裁剪。全部原始逐块记录保留在 worker report.json。', '',
               '```powershell',
-              'python run_streaming_study.py --root data/musdb18-hq --out results/streaming_study_new',
+              f"python run_streaming_study.py --root data/musdb18-hq --window-inference {config.get('window_inference_study', 'ola')} --out results/streaming_study_new",
               'python build_streaming_study_report.py --run results/streaming_study_new',
               '```', '',
-              'protocol.json 固定模型、源文件、运行环境及输入/参考片段哈希。run.json 记录 13 个任务的命令、日志和 GPU 前后快照；streaming_study_analysis.json 保存逐曲整段及公共区间分数、波形哈希和分析程序哈希。报告生成器与推理源文件分开记录。']
+              f"protocol.json 固定模型、源文件、运行环境及输入/参考片段哈希。run.json 记录 {config['expected_jobs']} 个任务的命令、日志和 GPU 前后快照；streaming_study_analysis.json 保存逐曲整段及公共区间分数、波形哈希和分析程序哈希。报告生成器与推理源文件分开记录。"]
     return '\n'.join(lines)+'\n'
 
 
@@ -189,17 +223,23 @@ def build(out):
     require(state.get('status') == 'complete', 'Complete all inference before analyzing this study')
     context = state['context']
     config = context['configuration']
+    settings = config['settings']
+    expected_count = 1 + len(TRACKS) * len(settings)
     require(read_json(out/'protocol.json') == context and state['identity'] == digest(out/'protocol.json'),
             'Protocol identity/context changed')
-    require(config['tracks'] == TRACKS and config['settings'] == SETTINGS and config['expected_jobs'] == 13,
+    declared_settings = study_settings(config.get('window_inference_study', 'ola'))
+    legacy = config.get('schema_version') == 1 and 'window_inference_study' not in config
+    require(config['tracks'] == TRACKS and settings == (SETTINGS if legacy else declared_settings)
+            and config['expected_jobs'] == expected_count,
             'Unexpected study tracks/settings')
     require(config['timing_trials_per_track_setting'] == 1 and context['data']['test_set_accessed'] is False,
             'Expected one-trial development-only experiment')
     for name, expected_hash in context['source_hashes'].items():
         require(digest(PROJECT/name) == expected_hash, f'Inference/metric source changed since run: {name}')
     expected_jobs = {'offline_amp2s'} | {stream_job_name(index, setting)
-        for index in range(1, 4) for setting in SETTINGS}
-    require(state['job_count'] == 13 and set(state['jobs']) == expected_jobs, 'Expected exactly thirteen declared jobs')
+        for index in range(1, 4) for setting in settings}
+    require(state['job_count'] == expected_count and set(state['jobs']) == expected_jobs,
+            'Job set differs from the declared protocol')
     reports, report_index = {}, {}
     for name, job in state['jobs'].items():
         require(job.get('status') == 'complete' and job.get('repeat') == 1, f'Incomplete/unexpected job: {name}')
@@ -208,7 +248,8 @@ def build(out):
         require(digest(path) == job['artifact_sha256'], f'Report changed: {name}')
         report = read_json(path)
         require(report.get('status') == 'complete', f'Worker report incomplete: {name}')
-        check_model(report['model'], context)
+        policy = (job.get('setting') or {}).get('window_inference', 'ola')
+        check_model(report['model'], context, policy)
         reports[name] = report
         report_index[name] = {'path': str(path), 'report_sha256': digest(path)}
     # All report completion and integrity checks above happen before reference
@@ -229,7 +270,7 @@ def build(out):
     require(len(offline['tracks']) == 3, 'Expected three offline reference rows')
     offline_rows = {row['track']: row for row in offline['tracks']}
     require(set(offline_rows) == set(TRACKS), 'Offline track set mismatch')
-    waves, waveform_manifest, steady_by_setting = {}, {}, {setting['name']: [] for setting in SETTINGS}
+    waves, waveform_manifest, steady_by_setting = {}, {}, {setting['name']: [] for setting in settings}
     ranges = []
     for index, track in enumerate(TRACKS, 1):
         manifest = segments[track]
@@ -245,7 +286,7 @@ def build(out):
         waves[track], waveform_manifest[track] = {}, {}
         audio, proof = read_wave(Path(row['audio_directory'])/'vocals_estimate.wav', frames, out)
         waves[track]['offline_amp2s'], waveform_manifest[track]['offline_amp2s'] = audio, proof
-        for setting in SETTINGS:
+        for setting in settings:
             key = stream_job_name(index, setting)
             report, job = reports[key], state['jobs'][key]
             require(job['track'] == track and job['setting'] == setting and job['stage'] == 'streaming', 'Job mapping mismatch')
@@ -262,10 +303,13 @@ def build(out):
             expected_worker_sources = {name: sha for name, sha in context['source_hashes'].items()
                                        if name in ('offline_stream_demo.py', 'vocalstream/streaming.py',
                                                    'vocalstream/bsroformer.py', 'vocalstream/roformer.py',
-                                                   'vocalstream/metrics.py')
+                                                   'vocalstream/metrics.py', 'vocalstream/window_inference.py')
                                        or name.startswith('vocalstream/vendor/zfturbo_bsroformer/')}
             require(worker_sources == expected_worker_sources, 'Streaming worker source snapshot differs')
             steady = verify_emissions(report, setting, frames)
+            if config.get('model_forward_counts_recorded'):
+                require(all(row.get('model_forward_passes') is not None for row in report['emissions']),
+                        'Missing forward-count observations in new-policy experiment')
             steady_by_setting[setting['name']].extend(steady)
             if steady:
                 ranges.append([steady[0]['output_start_sample'], steady[-1]['output_end_sample_exclusive']])
@@ -298,7 +342,7 @@ def build(out):
         for index, name in enumerate(TRACKS, 1):
             if name != track:
                 continue
-            for setting in SETTINGS:
+            for setting in settings:
                 report = reports[stream_job_name(index, setting)]
                 require(report['input_sha256'] == mixture_sha and report['reference_sha256'] == reference_sha,
                         'Source full WAV hashes changed between streaming jobs')
@@ -325,7 +369,7 @@ def build(out):
         per_track.append({'track': track, 'clip_start_sample_in_song': start,
                           'clip_samples': frames, 'common_interval_clip_relative_samples': common, 'settings': scores})
     quality_summary = {}
-    for name in ['offline_amp2s']+[setting['name'] for setting in SETTINGS]:
+    for name in ['offline_amp2s']+[setting['name'] for setting in settings]:
         quality_summary[name] = {
             'track_count': 3,
             'valid_whole_clip_si_sdr_tracks': sum(row['settings'][name]['quality_whole_clip']['si_sdr_db'] is not None for row in per_track),
@@ -338,12 +382,36 @@ def build(out):
                 if row['settings'][name]['quality_common_real_context_interval'] else None for row in per_track]),
             'common_interval_paired_delta_vs_offline_median_db': median([
                 row['settings'][name]['common_interval_si_sdr_delta_vs_offline_db'] for row in per_track])}
-    analysis = {'schema_version': 1, 'status': 'complete', 'configuration': config,
+    steady_timing = {name: timing_summary(rows) for name, rows in steady_by_setting.items()}
+    comparisons = []
+    for schedule in SETTINGS:
+        ola_name, single_name = schedule['name'], 'single_' + schedule['name']
+        if ola_name not in steady_timing or single_name not in steady_timing:
+            continue
+        ola, single = steady_timing[ola_name], steady_timing[single_name]
+        require(ola['emission_count'] == single['emission_count'], 'Matched policies have different output work')
+        ratio = None
+        if ola['emission_count'] and single['total_processing_seconds'] > 0:
+            ratio = ola['total_processing_seconds'] / single['total_processing_seconds']
+        comparisons.append({
+            'schedule': schedule['name'], 'ola_setting': ola_name, 'single_setting': single_name,
+            'ola_forwards_per_emission_median': ola.get('model_forward_passes_per_emission_median'),
+            'single_forwards_per_emission_median': single.get('model_forward_passes_per_emission_median'),
+            'steady_total_compute_time_ratio_ola_over_single': ratio,
+            'common_interval_paired_si_sdr_delta_single_minus_ola_median_db': median([
+                score_delta(row['settings'][single_name]['quality_common_real_context_interval']['si_sdr_db'],
+                            row['settings'][ola_name]['quality_common_real_context_interval']['si_sdr_db'])
+                for row in per_track]) if common else None,
+            'nominal_input_wait_unchanged_seconds': schedule['emit_seconds'] + schedule['lookahead_seconds'],
+            'timing_trials_per_track_policy': config['timing_trials_per_track_setting'],
+        })
+    analysis = {'schema_version': 2, 'status': 'complete', 'configuration': config,
                 'common_quality_interval_clip_relative_samples': common,
                 'common_interval_convention': 'start inclusive, end exclusive; one identical contiguous target interval across all tracks/settings and offline output',
                 'quality_summary': quality_summary, 'tracks': per_track,
-                'steady_emission_timing': {name: timing_summary(rows) for name, rows in steady_by_setting.items()},
-                'nominal_availability_seconds': {setting['name']: setting['emit_seconds']+setting['lookahead_seconds'] for setting in SETTINGS},
+                'steady_emission_timing': steady_timing,
+                'matched_window_policy_comparisons': comparisons,
+                'nominal_availability_seconds': {setting['name']: setting['emit_seconds']+setting['lookahead_seconds'] for setting in settings},
                 'waveform_manifest': waveform_manifest, 'source_audio_manifest': source_audio_manifest,
                 'report_index': report_index, 'inference_source_hashes': context['source_hashes'],
                 'runtime': context['runtime'],

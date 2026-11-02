@@ -131,6 +131,12 @@ class BoundedFutureSeparator:
         wall_seconds = time.perf_counter() - begin
         if not np.isfinite(network_seconds) or network_seconds < 0:
             raise ValueError("Separator forward time must be finite and nonnegative")
+        last_run = getattr(self.separator, "last_run", None) or {}
+        forward_passes = last_run.get("model_forward_passes")
+        if forward_passes is not None and (
+                isinstance(forward_passes, bool) or not isinstance(forward_passes, int)
+                or forward_passes < 1):
+            raise ValueError("Separator model_forward_passes must be a positive integer when provided")
 
         # These are virtual audio-clock times. No sleeping, soundcard callback,
         # file read, or output write is represented as processing work here.
@@ -155,6 +161,9 @@ class BoundedFutureSeparator:
             "availability_delay_from_output_end_boundary_seconds": (required_input - target_end) / self.sample_rate,
             "processing_seconds": wall_seconds,
             "network_forward_seconds": float(network_seconds),
+            "model_forward_passes": forward_passes,
+            "separator_processing_seconds": last_run.get("processing_seconds"),
+            "cuda_peak_allocated_bytes": last_run.get("cuda_peak_allocated_bytes"),
             "processing_rtf_vs_emitted_audio": wall_seconds / (count / self.sample_rate),
             "nominal_compute_budget_seconds": period_seconds,
             "compute_exceeds_nominal_emit_period": wall_seconds > period_seconds,
@@ -185,6 +194,8 @@ class BoundedFutureSeparator:
             processing = np.array([row["processing_seconds"] for row in records])
             duration = sum(row["output_audio_seconds"] for row in records)
             delay = np.array([row["virtual_ready_delay_from_first_output_boundary_seconds"] for row in records])
+            forwards = [row["model_forward_passes"] for row in records]
+            complete_forwards = all(value is not None for value in forwards)
             return {
                 "emission_count": len(records),
                 "total_processing_seconds": float(processing.sum()),
@@ -193,6 +204,8 @@ class BoundedFutureSeparator:
                 "processing_seconds_median": float(np.median(processing)),
                 "processing_seconds_p95": float(np.percentile(processing, 95)),
                 "processing_seconds_max": float(processing.max()),
+                "model_forward_passes_total": sum(forwards) if complete_forwards else None,
+                "model_forward_passes_per_emission_median": float(np.median(forwards)) if complete_forwards else None,
                 "compute_budget_miss_count": sum(row["compute_exceeds_nominal_emit_period"] for row in records),
                 "compute_budget_miss_fraction": sum(row["compute_exceeds_nominal_emit_period"] for row in records) / len(records),
                 "virtual_deadline_miss_count": sum(row["virtual_deadline_missed"] for row in records),
@@ -220,6 +233,8 @@ class BoundedFutureSeparator:
             "finished": self._finished, "max_retained_input_buffer_samples": self._max_buffer_samples,
             "rolling_window_padding": "zero before start and after explicit EOF; internal separator padding may also apply",
             "output_overlap_crossfade": False,
+            "window_inference_mode": getattr(self.separator, "window_inference_mode", "ola"),
+            "network_state_cached": False,
             "timing_scope": "rolling window creation, synchronized separator call and output crop; excludes input reads/push copy, model load/warmup, sink writes and sleep",
             "virtual_scheduler": "single serial worker; audio input released at packet sample boundary / fs; finish=max(input_release, previous_finish)+measured_compute",
             "deadline_definition": "available packet audio-clock time + nominal emit period; EOF flush is a separate burst and is excluded from steady-state",

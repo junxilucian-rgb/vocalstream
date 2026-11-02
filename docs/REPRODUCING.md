@@ -76,6 +76,15 @@ Protocol: three development songs, 60–64 s, vocal-only AMP, 2 s context. Compa
 
 This is one short timing observation per song/setting. Report computation over the output period, virtual queue/deadline misses, and SI-SDR separately. Audio-device latency is not measured. The recorded implementation exceeded all four compute budgets; a new run need not match its exact timing.
 
+### Experimental single-window comparison
+
+```shell
+python run_streaming_study.py --root path/to/musdb18-hq --window-inference compare --out results/window_compare_01
+python build_streaming_study_report.py --run results/window_compare_01
+```
+
+This opt-in protocol declares 25 jobs and reruns both window policies with the same schedules and inputs. `single` makes one model call per window; `ola` retains nested overlap-add. The recorded study completed on 2026-10-22; no automated software test suite was run. See [the measurements and interpretation guide](WINDOW_INFERENCE.md) before making performance claims. Source identities changed, so preserve earlier results and choose a new output folder.
+
 ## 5. Baselines, bleed and preservation
 
 ```shell

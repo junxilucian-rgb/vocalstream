@@ -100,9 +100,28 @@ The weak-bleed result shows why preservation matters: processing can damage an a
 
 Evidence: [18-job refinement analysis and manifest](../reports/refinement.json); [overview figure](../assets/refinement_overview.png).
 
+## 4. Removing nested overlap-add from stream windows
+
+On 2026-10-22, a 25-job matched study reran both `ola` and `single` policies on the same three 60–64 s development excerpts. Both use vocal-only AMP, the same checkpoint, two-second context and the same four output/lookahead schedules. The comparison changes only how the supplied window is processed internally. `ola` makes two model calls and averages their outputs; `single` makes one call without this inner averaging. It retains the model's STFT/ISTFT and bidirectional attention.
+
+| E / L (ms) | Block compute p50: ola → single (ms) | Steady total compute ratio ola ÷ single | Median paired SI-SDR change single − ola (dB) |
+| --- | ---: | ---: | ---: |
+| 20 / 0 | 182.91 → 91.60 | 1.991 | +6.528 |
+| 20 / 40 | 183.45 → 91.39 | 2.007 | +3.813 |
+| 20 / 160 | 183.42 → 91.65 | 1.997 | +0.731 |
+| 80 / 40 | 183.11 → 91.32 | 2.007 | +1.502 |
+
+Quality uses the identical clip-relative `[1.980, 3.840)` s interval across all eight streaming settings and the offline reference. Every paired median is positive, but two individual song/schedule pairs decreased slightly (approximately −0.105 dB and −0.029 dB). These are median paired changes, not differences between two score medians. There is one timing run per song/schedule/policy; pooled block quantiles do not provide independent timing repetitions.
+
+The fresh OLA baseline was approximately 183 ms here; the earlier 208 ms timing is a separate observation. At 80/40 ms, workload RTF improved from 2.293 to 1.143. **All observed steady blocks still exceeded their compute period.** This change reduces computation and virtual backlog but does not establish real-time device operation. Both policies still recompute the Transformer for each emission; there is no neural cache or output crossfade. No automated software test suite or subjective listener study was run for this change.
+
+Evidence: [25-job analysis and sanitized reports](../reports/window_comparison.json), [protocol and interpretation](WINDOW_INFERENCE.md).
+
+![Matched window policy comparison](../assets/window_comparison_overview.png)
+
 ## Evidence publication and limitations
 
-The [export utility](../scripts/export_public_results.py) reads existing evidence, verifies each original job report's SHA-256 against its completed run record, and exports sanitized JSON. It never runs a model. All 47 per-job reports are included. Measurements, per-track errors, streaming block timings, runtime metadata and source/checkpoint/input/output hashes are retained. Absolute local paths become logical project-relative or `MUSDB18-HQ/` identifiers; unknown runtime/cache paths are omitted. Audio, model weights, console logs and correspondence are excluded. Historical audio/log path identifiers in JSON do not imply those files are publicly available.
+The [export utility](../scripts/export_public_results.py) reads existing evidence, verifies each original job report's SHA-256 against its completed run record, and exports sanitized JSON. It never runs a model. All 72 per-job reports are included: the earlier 47 plus the new 25-job window comparison. Measurements, per-track errors, streaming block timings, runtime metadata and source/checkpoint/input/output hashes are retained. Absolute local paths become logical project-relative or `MUSDB18-HQ/` identifiers; unknown runtime/cache paths are omitted. Audio, model weights, console logs and correspondence are excluded. Historical audio/log path identifiers in JSON do not imply those files are publicly available.
 
 `original_*_sha256` values identify the original private evidence, whose bytes differ from the sanitized exports. `reports/index.json` and each job manifest also record SHA-256 values for the actual published JSON files. Source hashes describe the historical experiment versions; publication edits can make current source hashes differ. Reproducing a run creates new timing and potentially new numeric outputs; it does not overwrite historical evidence.
 

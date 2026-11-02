@@ -37,6 +37,8 @@ def main():
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument("--precision", choices=("fp32", "amp"), default="amp")
     parser.add_argument("--heads", choices=("all", "vocals"), default="vocals")
+    parser.add_argument("--window-inference", choices=("ola", "single"), default="ola",
+                        help="ola: original nested overlap-add; single: one model forward per exact context")
     args = parser.parse_args()
     if not math.isfinite(args.start) or args.start < 0 or not math.isfinite(args.duration) or args.duration <= 0:
         parser.error("start must be finite >=0; duration must be finite >0")
@@ -50,10 +52,13 @@ def main():
         parser.error("At sample resolution, context must contain at least one emit interval plus lookahead")
     if args.device == "cpu" and args.precision == "amp":
         parser.error("Use --precision fp32 with --device cpu")
+    if (args.window_inference == "single"
+            and round(args.context_seconds * 44100) != round(args.context_seconds * 44100 / 441) * 441):
+        parser.error("Single-window context must align to the pinned 441-sample STFT hop (10 ms)")
     project = Path(__file__).resolve().parent
     source_files = [Path(__file__), project / "vocalstream/streaming.py",
                     project / "vocalstream/bsroformer.py", project / "vocalstream/roformer.py",
-                    project / "vocalstream/metrics.py"]
+                    project / "vocalstream/metrics.py", project / "vocalstream/window_inference.py"]
     source_files.extend(sorted((project / "vocalstream/vendor/zfturbo_bsroformer").glob("*.py")))
     source_hashes = {str(p.relative_to(project)): sha256(p) for p in source_files}
     # No implicit dataset traversal; only the explicitly supplied file is read.
@@ -82,9 +87,13 @@ def main():
         np.random.seed(seed)
         torch.manual_seed(seed)
         torch.set_num_threads(1)
-        separator = BSRoFormerBaseline(device=args.device, precision=args.precision,
-                                      overlap=2, heads=args.heads,
-                                      chunk_seconds=args.context_seconds, warmup=True)
+        options = dict(device=args.device, precision=args.precision, heads=args.heads,
+                       chunk_seconds=args.context_seconds, warmup=True)
+        if args.window_inference == "single":
+            from vocalstream.window_inference import BSRoFormerWindowSeparator
+            separator = BSRoFormerWindowSeparator(**options)
+        else:
+            separator = BSRoFormerBaseline(overlap=2, **options)
         stream = BoundedFutureSeparator(separator, sample_rate=rate,
                                         context_seconds=args.context_seconds,
                                         emit_seconds=args.emit_seconds,
@@ -140,6 +149,7 @@ def main():
         "clip_start_sample": start_sample, "clip_start_seconds": start_sample / rate,
         "clip_samples": actual_samples, "clip_seconds": actual_samples / rate,
         "clip_end_is_explicit_stream_eof": True,
+        "window_inference_mode": args.window_inference,
         "source_files_sha256": source_hashes,
         "python_executable": sys.executable, "python_version": platform.python_version(),
         "torch_version": torch.__version__, "torch_threads": torch.get_num_threads(),

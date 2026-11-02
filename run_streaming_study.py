@@ -1,6 +1,9 @@
 """Declare and run a short bounded-future scheduling study on development clips.
 
 This is one timing observation per setting, not an audio-device benchmark.
+The opt-in compare mode reruns nested OLA and single-forward inference under
+the same bounded-future schedules; historical reports are never reused as a
+new timing baseline.
 Every worker loads and warms up its own pinned pretrained model.
 """
 from __future__ import annotations
@@ -26,12 +29,22 @@ SETTINGS = [
 ]
 
 
+def study_settings(mode="ola"):
+    """Keep historical OLA names while giving each new policy a unique name."""
+    modes = ("ola", "single") if mode == "compare" else (mode,)
+    if any(value not in ("ola", "single") for value in modes):
+        raise ValueError("Unknown window inference mode")
+    return [dict(setting, name=setting["name"] if policy == "ola" else "single_" + setting["name"],
+                 window_inference=policy)
+            for setting in SETTINGS for policy in modes]
+
+
 def inference_sources():
     # A separately written analysis/report generator cannot change inference
     # identity while workers are running. Only used inference sources are pinned.
     names = ['run_streaming_study.py', 'project_paths.py', 'run_project.py', 'evaluate_project.py',
              'offline_stream_demo.py', 'vocalstream/__init__.py',
-             'vocalstream/streaming.py', 'vocalstream/bsroformer.py',
+             'vocalstream/streaming.py', 'vocalstream/window_inference.py', 'vocalstream/bsroformer.py',
              'vocalstream/roformer.py', 'vocalstream/baselines.py',
              'vocalstream/data.py', 'vocalstream/metrics.py', 'vocalstream/conditions.py']
     names += [p.relative_to(PROJECT).as_posix()
@@ -73,7 +86,8 @@ def streaming_command(output, config, track, setting):
             '--duration', str(config['duration_seconds']), '--context-seconds', '2',
             '--emit-seconds', str(setting['emit_seconds']),
             '--lookahead-seconds', str(setting['lookahead_seconds']),
-            '--device', 'cuda', '--precision', 'amp', '--heads', 'vocals']
+            '--device', 'cuda', '--precision', 'amp', '--heads', 'vocals',
+            '--window-inference', setting.get('window_inference', 'ola')]
 
 
 def main():
@@ -82,12 +96,16 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--start', type=float, default=60.0)
     parser.add_argument('--duration', type=float, default=4.0)
+    parser.add_argument('--window-inference', choices=('ola', 'single', 'compare'), default='ola',
+                        help='compare reruns both policies with matched schedules in the same environment')
     args = parser.parse_args()
     if not math.isfinite(args.start) or args.start < 0 or not math.isfinite(args.duration) or args.duration <= 0:
         parser.error('start must be finite >=0; duration must be finite >0')
     sample_count = round(args.duration*44100)
     if sample_count < 1:
         parser.error('duration is shorter than one sample')
+    settings = study_settings(args.window_inference)
+    job_count = 1 + len(TRACKS) * len(settings)
     from vocalstream.data import dataset_info, discover_hq, load_segment
     from evaluate_project import _audio_hash
 
@@ -102,13 +120,15 @@ def main():
     metadata = dataset_info(root)
     if len(inventory) != 100 or metadata['kind'] != 'MUSDB18-HQ':
         raise ValueError('This study requires the complete MUSDB18-HQ train inventory')
-    config = {'schema_version': 1, 'root': str(root), 'tracks': TRACKS,
+    config = {'schema_version': 2, 'root': str(root), 'tracks': TRACKS,
               'start_seconds': args.start, 'duration_seconds': args.duration,
               'sample_rate': 44100, 'requested_samples': sample_count,
               'device': 'cuda', 'precision': 'amp', 'heads': 'vocals',
               'context_seconds': 2.0, 'overlap': 2, 'threads': 1, 'seed': 2026,
-              'settings': SETTINGS, 'timing_trials_per_track_setting': 1,
-              'expected_jobs': 13,
+              'overlap_scope': 'offline reference and ola policy; single policy uses one full-context forward',
+              'settings': settings, 'window_inference_study': args.window_inference,
+              'model_forward_counts_recorded': True, 'timing_trials_per_track_setting': 1,
+              'expected_jobs': job_count,
               'scope': 'three short official development clips; simulated file streaming, no training/test/device I/O',
               'quality_protocol': 'whole clip plus one identical contiguous real-context interval shared by all streaming settings and the offline reference; undefined if empty'}
     segments = []
@@ -140,13 +160,15 @@ def main():
                 raise ValueError('Output is not an empty/new study folder')
             write_json(protocol, context)
         runner = JobRunner(out, digest(protocol), context)
-        runner.state.update(status='running', job_count=13)
+        runner.state.update(status='running', job_count=job_count)
         runner.state.pop('error', None)
         runner.save()
         jobs = [('offline_amp2s', 'offline', None, None)]
         # Rotate setting order by track; still only one observation per setting.
         for index, name in enumerate(TRACKS, 1):
-            order = SETTINGS[index-1:] + SETTINGS[:index-1]
+            order = settings[index-1:] + settings[:index-1]
+            if index % 2 == 0:
+                order = list(reversed(order))
             jobs += [(stream_job_name(index, setting), 'streaming', name, setting) for setting in order]
         try:
             for name, stage, track, setting in jobs:
